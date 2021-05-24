@@ -1,27 +1,25 @@
 <?php
 
 
-namespace App\Servises;
+namespace App\Services;
 
 use GuzzleHttp\Client;
 use App\Models\Product;
 
 class BergAPI
 {
-//    private $artikul;
     private $api_key;
     private $base_url;
 
     public function __construct()
     {
-//        $this->artikul = $artikul;
         $this->api_key = env('BERG_API_KEY');
         $this->base_url = env('BERG_STOCK_REQUEST_URL');
     }
 
     public function getProductsWhitArtikul(string $artikul) {
         $client = new Client();
-        $response = $client->request('GET', $this->getUrlWhitArtikul());
+        $response = $client->request('GET', $this->getUrlWhitArtikul($artikul));
         $products = json_decode($response->getBody()->getContents(), true);
         if (empty($products['resources'])) {
             return [];
@@ -30,8 +28,8 @@ class BergAPI
         return $products;
     }
 
-    private function getUrlWhitArtikul() {
-        $url = $this->base_url.'?items[0][resource_article]='.$this->artikul.'&key='.$this->api_key;
+    private function getUrlWhitArtikul($artikul) {
+        $url = $this->base_url.'?items[0][resource_article]='.$artikul.'&key='.$this->api_key;
         return $url;
     }
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SearchRequest;
-use App\Servises\BergAPI;
+use App\Services\ParseService;
 
 class SearchController extends Controller
 {
@@ -14,8 +14,8 @@ class SearchController extends Controller
         $success = false;
 
 //        берг products
-        $berg_api = new BergAPI();
-        $berg_products = $berg_api->getProductsWhitArtikul($artikul);
+        $pars_service = new ParseService();
+        $berg_products = $pars_service->bergApi->getProductsWhitArtikul($artikul);
         if (!empty($berg_products)) {
             $success = true;
         }
