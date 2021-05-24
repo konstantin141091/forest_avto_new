@@ -10,12 +10,12 @@ class SearchController extends Controller
     public function index(SearchRequest $request) {
         $request->flash();
         $request->validated();
-        $artikul = $request->artikul;
+        $article = $request->artikul;
         $success = false;
 
 //        берг products
         $pars_service = new ParseService();
-        $berg_products = $pars_service->bergApi->getProductsWhitArtikul($artikul);
+        $berg_products = $pars_service->bergApi->getProductsWhitArticle($article);
         if (!empty($berg_products)) {
             $success = true;
         }

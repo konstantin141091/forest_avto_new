@@ -17,9 +17,9 @@ class BergAPI
         $this->base_url = env('BERG_STOCK_REQUEST_URL');
     }
 
-    public function getProductsWhitArtikul(string $artikul) {
+    public function getProductsWhitArticle(string $article) {
         $client = new Client();
-        $response = $client->request('GET', $this->getUrlWhitArtikul($artikul));
+        $response = $client->request('GET', $this->getUrlWhitArticle($article));
         $products = json_decode($response->getBody()->getContents(), true);
         if (empty($products['resources'])) {
             return [];
@@ -28,8 +28,8 @@ class BergAPI
         return $products;
     }
 
-    private function getUrlWhitArtikul($artikul) {
-        $url = $this->base_url.'?items[0][resource_article]='.$artikul.'&key='.$this->api_key;
+    private function getUrlWhitArticle($article) {
+        $url = $this->base_url.'?items[0][resource_article]='.$article.'&key='.$this->api_key;
         return $url;
     }
 
@@ -43,24 +43,19 @@ class BergAPI
                 $product = new Product();
 //            product data
                 $product->fill($value);
+                $product->product_id = $value['id'];
 //            brand data
                 $product->brand_id = $value['brand']['id'];
                 $product->brand_name = $value['brand']['name'];
 //            offer data
                 $product->offers_id = $el['warehouse']['id'];
                 $product->offers_name = $el['warehouse']['name'];
-                $product->offers_type = $el['warehouse']['type'];
                 $product->offers_price = $el['price'];
                 $product->offers_average_period = $el['average_period'];
                 $product->offers_assured_period = (new \DateTime())
                     ->add(new \DateInterval("P{$days}D"))
                     ->format('d-m-Y');
-                $product->offers_reliability = $el['reliability'];
-                $product->offers_is_transit = $el['is_transit'];
                 $product->offers_quantity = $el['quantity'];
-                $product->offers_available_more = $el['available_more'];
-                $product->offers_multiplication_factor = $el['multiplication_factor'];
-                $product->offers_delivery_type = $el['delivery_type'];
                 $product->shop_name = 'berg';
                 array_push($response[$value['brand']['name']], $product);
             }

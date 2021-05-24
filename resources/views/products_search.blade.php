@@ -43,7 +43,7 @@
                                 <div class="tr">
                                     <div class="td">
                                         <div class="product-info-td__title">{{ $brand_name[0]->brand_name }}
-                                            <span>{{ $brand_name[0]->id }}</span>
+                                            <span>{{ $brand_name[0]->product_id }}</span>
                                         </div>
                                         <div class="product-info-td__desc">{{ $brand_name[0]->name }}</div>
                                     </div>
