@@ -8,18 +8,18 @@ use App\Models\Product;
 
 class BergAPI
 {
-    private $artikul;
+//    private $artikul;
     private $api_key;
     private $base_url;
 
-    public function __construct(string $artikul)
+    public function __construct()
     {
-        $this->artikul = $artikul;
+//        $this->artikul = $artikul;
         $this->api_key = env('BERG_API_KEY');
         $this->base_url = env('BERG_STOCK_REQUEST_URL');
     }
 
-    public function getProductsWhitArtikul() {
+    public function getProductsWhitArtikul(string $artikul) {
         $client = new Client();
         $response = $client->request('GET', $this->getUrlWhitArtikul());
         $products = json_decode($response->getBody()->getContents(), true);

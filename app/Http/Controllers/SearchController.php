@@ -14,8 +14,8 @@ class SearchController extends Controller
         $success = false;
 
 //        берг products
-        $berg_api = new BergAPI($artikul);
-        $berg_products = $berg_api->getProductsWhitArtikul();
+        $berg_api = new BergAPI();
+        $berg_products = $berg_api->getProductsWhitArtikul($artikul);
         if (!empty($berg_products)) {
             $success = true;
         }
