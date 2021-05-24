@@ -15,29 +15,24 @@ class CreateCartTable extends Migration
     {
         Schema::create('cart', function (Blueprint $table) {
             $table->id('cart_id');
-//            $table->unsignedBigInteger('cart_id');
-//            $table->primary('cart_id');
             $table->string('session_id');
             $table->unsignedBigInteger('quantity');
             $table->unsignedBigInteger('total');
 //            по продукту
-            $table->string('id');
+            $table->string('product_id');
             $table->string('article');
             $table->string('name');
             $table->string('shop_name');
+            $table->string('partnumber');
+//            по складу
             $table->string('offers_id');
             $table->string('offers_name');
-            $table->string('offers_type')->nullable();
             $table->string('offers_price');
             $table->string('offers_average_period')->nullable();
             $table->string('offers_assured_period')->nullable();
-            $table->string('offers_reliability')->nullable();
-            $table->boolean('offers_is_transit')->default(false);
             $table->string('offers_quantity')->nullable();
-            $table->boolean('offers_available_more')->default(false);
-            $table->string('offers_multiplication_factor')->nullable();
-            $table->string('offers_delivery_type')->nullable();
-            $table->string('brand_id');
+//            по бренду
+            $table->string('brand_id')->nullable();
             $table->string('brand_name')->nullable();
             $table->timestamps();
         });

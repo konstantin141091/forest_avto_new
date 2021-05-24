@@ -44,6 +44,7 @@ class BergAPI
 //            product data
                 $product->fill($value);
                 $product->product_id = $value['id'];
+                $product->shop_name = 'berg';
 //            brand data
                 $product->brand_id = $value['brand']['id'];
                 $product->brand_name = $value['brand']['name'];
@@ -56,7 +57,6 @@ class BergAPI
                     ->add(new \DateInterval("P{$days}D"))
                     ->format('d-m-Y');
                 $product->offers_quantity = $el['quantity'];
-                $product->shop_name = 'berg';
                 array_push($response[$value['brand']['name']], $product);
             }
         }

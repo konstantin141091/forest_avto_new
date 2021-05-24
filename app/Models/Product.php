@@ -11,6 +11,7 @@ class Product extends Model
         'article',
         'name',
         'shop_name',
+        'partnumber',
 //        offers
         'offers_id',
         'offers_name',
