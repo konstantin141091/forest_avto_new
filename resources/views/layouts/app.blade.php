@@ -14,9 +14,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="outer-wrapper">
         <header class="header @yield('main-screen')">
             <div class="wrapper">
                 @section('header')
@@ -55,44 +60,48 @@
                 @show
             </div>
         </header>
-        <main>
-            @yield('content')
-        </main>
+        @yield('content')
 
-        <footer class="footer">
-            <div class="wrapper">
-                <div class="footer__nav-block">
-                    <div class="footer__logo">
-                        <a href="{{ route('index') }}">
-                            <img src="/storage/img/logo.svg" alt="Логотип">
-                        </a>
-                    </div>
-                    <span class="footer__name">
+    </div>
+    <footer class="footer">
+        <div class="wrapper">
+            <div class="footer__nav-block">
+                <div class="footer__logo">
+                    <a href="{{ route('index') }}">
+                        <img src="/storage/img/logo.svg" alt="Логотип">
+                    </a>
+                </div>
+                <span class="footer__name">
               Интернет-магазин автозапчастей
             </span>
-                    <nav class="footer__nav">
-                        <div class="footer__nav-column">
-                            <li class="footer__nav-item"><a href="#">О компании</a></li>
-                            <li class="footer__nav-item"><a href="#">Новости</a></li>
-                        </div>
-                        <div class="footer__nav-column">
-                            <li class="footer__nav-item"><a href="#">Доставка и оплата</a></li>
-                            <li class="footer__nav-item"><a href="#">Поставщикам</a></li>
-                        </div>
-                        <div class="footer__nav-column">
-                            <li class="footer__nav-item"><a href="#">Конфиденциальность</a></li>
-                            <li class="footer__nav-item"><a href="#">Контакты</a></li>
-                        </div>
-                    </nav>
-                </div>
-                <div class="footer__copyright">
-                    <span class="copyright">© 2020 «Автозапчасти». Все права защищены.</span>
-                    <div class="footer__dev">
-                        Разработка сайта - <a href="#"><img src="/storage/img/forestweb-logo.svg" alt="Разработка сайта"></a>
+                <nav class="footer__nav">
+                    <div class="footer__nav-column">
+                        <li class="footer__nav-item"><a href="#">О компании</a></li>
+                        <li class="footer__nav-item"><a href="#">Новости</a></li>
                     </div>
+                    <div class="footer__nav-column">
+                        <li class="footer__nav-item"><a href="#">Доставка и оплата</a></li>
+                        <li class="footer__nav-item"><a href="#">Поставщикам</a></li>
+                    </div>
+                    <div class="footer__nav-column">
+                        <li class="footer__nav-item"><a href="#">Конфиденциальность</a></li>
+                        <li class="footer__nav-item"><a href="#">Контакты</a></li>
+                    </div>
+                </nav>
+            </div>
+            <div class="footer__copyright">
+                <span class="copyright">© 2020 «Автозапчасти». Все права защищены.</span>
+                <div class="footer__dev">
+                    Разработка сайта - <a href="#"><img src="/storage/img/forestweb-logo.svg" alt="Разработка сайта"></a>
                 </div>
             </div>
-        </footer>
-    </div>
+        </div>
+    </footer>
+{{--    <script src="js/jquery.min.js"></script>--}}
+{{--    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>--}}
+{{--    <script src="js/sticky.min.js"></script>--}}
+{{--    <script src="js/cleave.min.js"></script>--}}
+{{--    <script src="js/map.js"></script>--}}
+{{--    <script src="js/script.js"></script>--}}
 </body>
 </html>

@@ -13,7 +13,6 @@ class SearchController extends Controller
         $article = $request->artikul;
         $success = false;
         $pars_service = new ParseService();
-
 //        берг products
         $berg_products = $pars_service->bergApi->getProductsWhitArticle($article);
         if (!empty($berg_products)) {

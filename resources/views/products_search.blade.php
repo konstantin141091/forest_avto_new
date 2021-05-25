@@ -2,7 +2,8 @@
 @section('page-title', 'Результаты поиска')
 
 @section('content')
-    <div class="wrapper">
+    <main>
+        <div class="wrapper">
             <h1 class="page-title">Результаты поиска</h1>
             <p class="product-description">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
@@ -20,128 +21,129 @@
                     <span class="product-advs__text">Гарантия</span>
                 </li>
             </ul>
-        @if($success)
-            <div class="search-results">
-                <div class="main-product">
-{{--                    заголовок--}}
-                    <div class="title-block">
-                        <h2 class="subtitle">Искомый товар</h2>
-                        <ul class="sort">
-                            <li>Сортировать по:</li>
-                            <li class="current"><a>умолчанию</a></li>
-                            <li><a href="#">цене</a></li>
-                            <li><a href="#">бренду</a></li>
-                        </ul>
+            @if($success)
+                <div class="search-results">
+                    <div class="main-product">
+                        {{--                    заголовок--}}
+                        <div class="title-block">
+                            <h2 class="subtitle">Искомый товар</h2>
+                            <ul class="sort">
+                                <li>Сортировать по:</li>
+                                <li class="current"><a>умолчанию</a></li>
+                                <li><a href="#">цене</a></li>
+                                <li><a href="#">бренду</a></li>
+                            </ul>
+                        </div>
+                        <h3>Berg!!!</h3>
+                        {{--рендер товаров берга--}}
+                        @forelse($berg_products as $brand_name)
+                            <div class="result-table">
+                                <div class="product-info-td">
+                                    <div class="tr">
+                                        <div class="caption">Описание товара</div>
+                                    </div>
+                                    <div class="tr">
+                                        <div class="td">
+                                            <div class="product-info-td__title">{{ $brand_name[0]->brand_name }}
+                                                <span>{{ $brand_name[0]->product_id }}</span>
+                                            </div>
+                                            <div class="product-info-td__desc">{{ $brand_name[0]->name }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="stocks-info-td">
+                                    <div class="tr">
+                                        <div class="caption">Наличие</div>
+                                        <div class="caption">Дата доставки</div>
+                                        <div class="caption">Цена</div>
+                                        <div class="caption">Кол-во</div>
+                                    </div>
+                                    @forelse($brand_name as $product)
+                                        <product-component :product="{{$product}}"></product-component>
+                                    @empty
+
+                                    @endforelse
+                                </div>
+
+                            </div>
+                        @empty
+                        @endforelse
+
+                        <h3>Rossko!!!</h3>
+                        {{--рендер товаров росско--}}
+                        @forelse($rossko_products as $brand_name)
+                            <div class="result-table">
+                                <div class="product-info-td">
+                                    <div class="tr">
+                                        <div class="caption">Описание товара</div>
+                                    </div>
+                                    <div class="tr">
+                                        <div class="td">
+                                            <div class="product-info-td__title">{{ $brand_name[0]->brand_name }}
+                                                <span>{{ $brand_name[0]->product_id }}</span>
+                                            </div>
+                                            <div class="product-info-td__desc">{{ $brand_name[0]->name }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="stocks-info-td">
+                                    <div class="tr">
+                                        <div class="caption">Наличие</div>
+                                        <div class="caption">Дата доставки</div>
+                                        <div class="caption">Цена</div>
+                                        <div class="caption">Кол-во</div>
+                                    </div>
+                                    @forelse($brand_name as $product)
+                                        <product-component :product="{{$product}}"></product-component>
+                                    @empty
+
+                                    @endforelse
+                                </div>
+
+                            </div>
+                        @empty
+                        @endforelse
+
+                        <h3>AvtoPiter!!!</h3>
+                        {{--рендер товаров автопитер--}}
+                        @forelse($avto_piter_products as $brand_name)
+                            <div class="result-table">
+                                <div class="product-info-td">
+                                    <div class="tr">
+                                        <div class="caption">Описание товара</div>
+                                    </div>
+                                    <div class="tr">
+                                        <div class="td">
+                                            <div class="product-info-td__title">{{ $brand_name[0]->brand_name }}
+                                                <span>{{ $brand_name[0]->product_id }}</span>
+                                            </div>
+                                            <div class="product-info-td__desc">{{ $brand_name[0]->name }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="stocks-info-td">
+                                    <div class="tr">
+                                        <div class="caption">Наличие</div>
+                                        <div class="caption">Дата доставки</div>
+                                        <div class="caption">Цена</div>
+                                        <div class="caption">Кол-во</div>
+                                    </div>
+                                    @forelse($brand_name as $product)
+                                        <product-component :product="{{$product}}"></product-component>
+                                    @empty
+
+                                    @endforelse
+                                </div>
+
+                            </div>
+                        @empty
+                        @endforelse
+
                     </div>
-                    <h3>Berg!!!</h3>
-                    {{--рендер товаров берга--}}
-                    @forelse($berg_products as $brand_name)
-                        <div class="result-table">
-                            <div class="product-info-td">
-                                <div class="tr">
-                                    <div class="caption">Описание товара</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td">
-                                        <div class="product-info-td__title">{{ $brand_name[0]->brand_name }}
-                                            <span>{{ $brand_name[0]->product_id }}</span>
-                                        </div>
-                                        <div class="product-info-td__desc">{{ $brand_name[0]->name }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="stocks-info-td">
-                                <div class="tr">
-                                    <div class="caption">Наличие</div>
-                                    <div class="caption">Дата доставки</div>
-                                    <div class="caption">Цена</div>
-                                    <div class="caption">Кол-во</div>
-                                </div>
-                                @forelse($brand_name as $product)
-                                    <product-component :product="{{$product}}"></product-component>
-                                @empty
-
-                                @endforelse
-                            </div>
-
-                        </div>
-                    @empty
-                    @endforelse
-
-                    <h3>Rossko!!!</h3>
-                    {{--рендер товаров росско--}}
-                    @forelse($rossko_products as $brand_name)
-                        <div class="result-table">
-                            <div class="product-info-td">
-                                <div class="tr">
-                                    <div class="caption">Описание товара</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td">
-                                        <div class="product-info-td__title">{{ $brand_name[0]->brand_name }}
-                                            <span>{{ $brand_name[0]->product_id }}</span>
-                                        </div>
-                                        <div class="product-info-td__desc">{{ $brand_name[0]->name }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="stocks-info-td">
-                                <div class="tr">
-                                    <div class="caption">Наличие</div>
-                                    <div class="caption">Дата доставки</div>
-                                    <div class="caption">Цена</div>
-                                    <div class="caption">Кол-во</div>
-                                </div>
-                                @forelse($brand_name as $product)
-                                    <product-component :product="{{$product}}"></product-component>
-                                @empty
-
-                                @endforelse
-                            </div>
-
-                        </div>
-                    @empty
-                    @endforelse
-
-                    <h3>AvtoPiter!!!</h3>
-                    {{--рендер товаров автопитер--}}
-                    @forelse($avto_piter_products as $brand_name)
-                        <div class="result-table">
-                            <div class="product-info-td">
-                                <div class="tr">
-                                    <div class="caption">Описание товара</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td">
-                                        <div class="product-info-td__title">{{ $brand_name[0]->brand_name }}
-                                            <span>{{ $brand_name[0]->product_id }}</span>
-                                        </div>
-                                        <div class="product-info-td__desc">{{ $brand_name[0]->name }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="stocks-info-td">
-                                <div class="tr">
-                                    <div class="caption">Наличие</div>
-                                    <div class="caption">Дата доставки</div>
-                                    <div class="caption">Цена</div>
-                                    <div class="caption">Кол-во</div>
-                                </div>
-                                @forelse($brand_name as $product)
-                                    <product-component :product="{{$product}}"></product-component>
-                                @empty
-
-                                @endforelse
-                            </div>
-
-                        </div>
-                    @empty
-                    @endforelse
-
                 </div>
-            </div>
-        @else
-            <p>Ничего не нашли</p>
-        @endif
-    </div>
+            @else
+                <p>Ничего не нашли</p>
+            @endif
+        </div>
+    </main>
 @endsection

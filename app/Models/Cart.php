@@ -9,10 +9,11 @@ class Cart extends Model
     protected $table = 'cart';
     protected $primaryKey = 'cart_id';
     protected $fillable = [
-        'id', // это id продукта
+        'product_id',
         'article',
         'name',
         'shop_name',
+        'partnumber',
 //        offers
         'offers_id',
         'offers_name',

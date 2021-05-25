@@ -11,7 +11,7 @@ Route::group([
     'as' => 'cart.',
 ], function () {
     Route::get('/', 'CartController@index')->name('index');
-    Route::post('/', 'CartController@store')->name('store');
+//    Route::post('/', 'CartController@store')->name('store');
 });
 // order
 Route::group([

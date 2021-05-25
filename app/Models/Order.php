@@ -19,6 +19,7 @@ class Order extends Model
         //оплата
         'payment_method',
         'total_price',
+        'total_quantity',
         'status',
     ];
 }

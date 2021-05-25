@@ -26,7 +26,7 @@
             display: flex;
             justify-content: space-between;
             align-items: stretch;
-            border-bottom: 1px solid #E5E5E5;
+            border-bottom: 1px solid #E5E5E5; 
         }
 
         th{
@@ -34,7 +34,7 @@
             font-style: normal;
             font-weight: normal;
             font-size: 16px;
-            line-height: 125%;
+            line-height: 125%;  
             color: #989898;
         }
 
@@ -52,7 +52,7 @@
             font-size: 18px;
             line-height: 122%;
             color: #26272D;
-           }
+           } 
 
            &:nth-child(4){
                flex-direction: column;
@@ -65,7 +65,7 @@
 
             &:last-child{
                 border-right: 1px solid #E5E5E5;
-            }
+            }   
         }
 
         td, th{
@@ -80,7 +80,7 @@
                     max-width: 68px;
                     margin-right: 30px;
                 }
-
+    
                 span, strong{
                     display: block;
                 }
@@ -115,7 +115,7 @@
             }
 
             &:not(:last-child){
-                border-right: 1px solid #E5E5E5;
+                border-right: 1px solid #E5E5E5; 
             }
 
             &:not(:first-child){
@@ -170,11 +170,11 @@
             &-title{
                 margin-bottom: 6px;
             }
-
+        
             &-info{
                 display: flex;
             }
-
+        
             &-presence{
                 position: relative;
                 padding-left: 17px;
@@ -280,7 +280,7 @@
                         opacity: 0.8;
                         background-color: #D63838;
                     }
-                }
+                }                
             }
         }
 
@@ -290,7 +290,7 @@
             align-items: flex-start;
             flex-wrap: wrap;
             position: relative;
-
+            
 
             input{
                 outline: none;
@@ -349,7 +349,6 @@
         font-size: 12px;
         line-height: 125%;
         color: #D63838 !important;
-        cursor: pointer;
 
         svg{
             margin-right: 6px;
@@ -512,8 +511,8 @@
 
             >.btn{
                 width: 100%;
-            }
-        }
+            }               
+        }    
 
         &-table{
 

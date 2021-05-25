@@ -24,7 +24,7 @@
 <!--                    <span>23 135 ₽</span>-->
                 </div>
 
-                <a v-bind:href="this.order_url" class="btn btn_filled">Перейти к оформлению</a>
+                <a v-bind:href="this.order_url" class="btn btn_filled vue-btn__filled">Перейти к оформлению</a>
             </div>
 
             <div class="cart-form">
@@ -139,5 +139,11 @@
         &__btn-delete-position {
             cursor: pointer;
         }
+    }
+    .cart__clear {
+        cursor: pointer;
+    }
+    .vue-btn__filled {
+        display: flex;
     }
 </style>

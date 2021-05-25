@@ -24,6 +24,8 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+    .header-cart:hover {
+        text-decoration: none;
+    }
 </style>

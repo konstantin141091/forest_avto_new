@@ -23,10 +23,10 @@ class CreateCartTable extends Migration
             $table->string('article');
             $table->string('name');
             $table->string('shop_name');
-            $table->string('partnumber');
+            $table->string('partnumber')->nullable();
 //            по складу
-            $table->string('offers_id');
-            $table->string('offers_name');
+            $table->string('offers_id')->nullable();
+            $table->string('offers_name')->nullable();
             $table->string('offers_price');
             $table->string('offers_average_period')->nullable();
             $table->string('offers_assured_period')->nullable();

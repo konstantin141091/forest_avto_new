@@ -32,26 +32,9 @@
   font-variant: normal;
   text-transform: none;
   line-height: 1em;
-  /*margin-left: .2em;*/
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-// .icon-delivery-box:before { content: '\e801'; } /* '' */
-// .icon-map:before { content: '\e802'; } /* '' */
-// .icon-map2:before { content: '\e803'; } /* '' */
-// .icon-phone:before { content: '\E805'; } /* '' */
-// .icon-search:before { content: '\e805'; } /* '' */
-// .icon-wallet:before { content: '\e806'; } /* '' */
-// .icon-all-news:before { content: '\E808'; } /* '' */
-// .icon-arrow:before { content: '\E809'; } /* '' */
-// .icon-badge:before { content: '\e809'; } /* '' */
-// .icon-calendar:before { content: '\E80A'; } /* '' */
-// .icon-callback:before { content: '\E80C'; } /* '' */
-// .icon-cart:before { content: '\E80D'; } /* '' */
-// .icon-catalog-icon:before { content: '\e80D'; } /* '' */
-// .icon-down-open-mini:before { content: '\E80F'; } /* '' */
-// .icon-check:before { content: '\e800'; } /* '' */
 
 .icon-delivery-box:before { content: '\e800'; } /* '' */
 .icon-map:before { content: '\e801'; } /* '' */
@@ -77,6 +60,10 @@ body{
   justify-content:space-between;
   align-items:stretch;
   min-height:100vh;
+}
+
+img{
+  max-width:100%;
 }
 
 .outer-wrapper{
@@ -1662,18 +1649,18 @@ body{
 
     &:hover{
       cursor: pointer;
-      color: #F06A6A;
+      color: #F06A6A !important;
       border-color: #F06A6A;
     }
 
   }
 
   &_filled{
-    background: #D63838;
-    color: #fff;
+    background: #D63838 !important;
+    color: #fff  !important;
 
     &:hover{
-      background: #F06A6A;
+      background: #F06A6A !important;
     }
   }
 
@@ -1682,3 +1669,5 @@ body{
     cursor: default;
   }
 }
+
+

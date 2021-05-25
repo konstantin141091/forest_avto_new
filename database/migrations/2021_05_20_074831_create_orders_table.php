@@ -28,13 +28,15 @@ class CreateOrdersTable extends Migration
                 'наличными курьеру',
                 'картой курьеру',
                 'при самовывозе',
+                'картой на сайте',
             ]);
             $table->unsignedBigInteger('total_price');
+            $table->unsignedBigInteger('total_quantity');
             $table->enum('status', [
                 'оформлен',
                 'в работе',
                 'выполнен',
-            ]);
+            ])->default('оформлен');
             $table->timestamps();
         });
     }

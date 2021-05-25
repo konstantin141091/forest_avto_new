@@ -16,12 +16,12 @@ export default {
 
   actions: {
     async API_ADD_ORDER ({ dispatch }, credentials) {
-      await axios.get('/sanctum/csrf-cookie');
       const answer = await axios.post('/order', credentials)
         .then((response) => {
           return response;
         })
         .catch((error) => {
+          console.log('ошибка при оформление заказа', error);
           return error.response;
         });
       return answer;

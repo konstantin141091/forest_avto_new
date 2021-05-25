@@ -24,12 +24,8 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:100',
-            'phone' => 'required|max:12',
-            'delivery_method' => 'required',
-            'address' => 'max:150',
-            'comment' => 'max:200',
-            'payment_method' => 'required',
+            'order' => 'required',
+            'cart' => 'required',
         ];
     }
     /**
@@ -39,13 +35,6 @@ class OrderRequest extends FormRequest
      */
     public function attributes()
     {
-        return [
-            'name' => 'Имя',
-            'phone' => 'Телефон',
-            'delivery_method' => 'Способ доставки',
-            'address' => 'Адрес',
-            'comment' => 'Коментарий',
-            'payment_method' => 'Способ оплаты',
-        ];
+        return [];
     }
 }

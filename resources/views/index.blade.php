@@ -43,88 +43,90 @@
 @endsection
 
 @section('content')
-    <div class="news-block">
+    <main>
+        <div class="news-block">
+            <div class="wrapper">
+                <header class="news-block__header">
+                    <div class="news-block__title">Наши новости</div>
+                    <a href="#" class="news-block__all-news">Все новости <i class="icon-font icon-all-news"></i></a>
+                </header>
+
+                <ul class="news-list">
+                    <li class="news-list__item">
+                        <span class="news-list__date"><img src="/storage/img/Calendar.svg" alt="Дата новости"> 6 декабря 2020</span>
+                        <a href="#">
+                            <h5 class="news-list__title">Информационное письмо MAHLE о смене упаковки фильтров</h5>
+                            <i class="icon-font icon-arrow"></i>
+                        </a>
+                    </li>
+
+                    <li class="news-list__item">
+                        <span class="news-list__date"><img src="/storage/img/Calendar.svg" alt="Дата новости"> 6 декабря 2020</span>
+                        <a href="#">
+                            <h5 class="news-list__title">Информационное письмо MAHLE о смене упаковки фильтров</h5>
+                            <i class="icon-font icon-arrow"></i>
+                        </a>
+                    </li>
+
+                    <li class="news-list__item">
+                        <span class="news-list__date"><img src="/storage/img/Calendar.svg" alt="Дата новости"> 6 декабря 2020</span>
+                        <a href="#">
+                            <h5 class="news-list__title">Информационное письмо MAHLE о смене упаковки фильтров</h5>
+                            <i class="icon-font icon-arrow"></i>
+                        </a>
+                    </li>
+
+                    <li class="news-list__item">
+                        <span class="news-list__date"><img src="/storage/img/Calendar.svg" alt="Дата новости"> 6 декабря 2020</span>
+                        <a href="#">
+                            <h5 class="news-list__title">Информационное письмо MAHLE о смене упаковки фильтров</h5>
+                            <i class="icon-font icon-arrow"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="need-consult">
+            <div class="wrapper need-consult__wrapper">
+                <div class="need-consult__text">
+                    <h4 class="need-consult__title">Нужна консультация?</h4>
+                    <span class="need-consult__subtitle">Оставь номер телефона, перезвоним за 10 минут</span>
+                </div>
+                <div class="need-consult__form">
+                    <form>
+                        <div class="form-block">
+                            <input type="text" placeholder="Ваш телефон">
+                        </div>
+                        <button type="submit">Получить консультацию</button>
+                        <span class="agreement">Нажимая на кнопку "Получить консультацию", вы соглашаетесь с <a href="#">политикой конфиденциальности</a></span>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="wrapper">
-            <header class="news-block__header">
-                <div class="news-block__title">Наши новости</div>
-                <a href="#" class="news-block__all-news">Все новости <i class="icon-font icon-all-news"></i></a>
-            </header>
-
-            <ul class="news-list">
-                <li class="news-list__item">
-                    <span class="news-list__date"><img src="/storage/img/Calendar.svg" alt="Дата новости"> 6 декабря 2020</span>
-                    <a href="#">
-                        <h5 class="news-list__title">Информационное письмо MAHLE о смене упаковки фильтров</h5>
-                        <i class="icon-font icon-arrow"></i>
-                    </a>
-                </li>
-
-                <li class="news-list__item">
-                    <span class="news-list__date"><img src="/storage/img/Calendar.svg" alt="Дата новости"> 6 декабря 2020</span>
-                    <a href="#">
-                        <h5 class="news-list__title">Информационное письмо MAHLE о смене упаковки фильтров</h5>
-                        <i class="icon-font icon-arrow"></i>
-                    </a>
-                </li>
-
-                <li class="news-list__item">
-                    <span class="news-list__date"><img src="/storage/img/Calendar.svg" alt="Дата новости"> 6 декабря 2020</span>
-                    <a href="#">
-                        <h5 class="news-list__title">Информационное письмо MAHLE о смене упаковки фильтров</h5>
-                        <i class="icon-font icon-arrow"></i>
-                    </a>
-                </li>
-
-                <li class="news-list__item">
-                    <span class="news-list__date"><img src="/storage/img/Calendar.svg" alt="Дата новости"> 6 декабря 2020</span>
-                    <a href="#">
-                        <h5 class="news-list__title">Информационное письмо MAHLE о смене упаковки фильтров</h5>
-                        <i class="icon-font icon-arrow"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="need-consult">
-        <div class="wrapper need-consult__wrapper">
-            <div class="need-consult__text">
-                <h4 class="need-consult__title">Нужна консультация?</h4>
-                <span class="need-consult__subtitle">Оставь номер телефона, перезвоним за 10 минут</span>
-            </div>
-            <div class="need-consult__form">
-                <form>
-                    <div class="form-block">
-                        <input type="text" placeholder="Ваш телефон">
-                    </div>
-                    <button type="submit">Получить консультацию</button>
-                    <span class="agreement">Нажимая на кнопку "Получить консультацию", вы соглашаетесь с <a href="#">политикой конфиденциальности</a></span>
-                </form>
+            <div class="main-about">
+                <div class="main-about__text">
+                    <h4 class="main-about__title">
+                        Большой ассортимент запчастей для иномарок
+                    </h4>
+                    <p class="main-about__desc">Автозапчасти – один из ведущих поставщиков автозапчастей в России. Мы напрямую сотрудничаем с импортерами, у нас можно заказать любые комплектующие для автомобилей и получить их в течение 24 часов. Для подбора нужной детали на сайте можно  оспользоваться поиском, отметив номер в поисковой строке или выбрать онлайн по марке машины, указав модель и модификацию.</p>
+                    <a href="#" class="main-about__link">Читать продолжение</a>
+                </div>
+                <div class="main-about__photo">
+                    <img src="/storage/img/about.jpg" alt="О нас">
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="wrapper">
-        <div class="main-about">
-            <div class="main-about__text">
-                <h4 class="main-about__title">
-                    Большой ассортимент запчастей для иномарок
-                </h4>
-                <p class="main-about__desc">Автозапчасти – один из ведущих поставщиков автозапчастей в России. Мы напрямую сотрудничаем с импортерами, у нас можно заказать любые комплектующие для автомобилей и получить их в течение 24 часов. Для подбора нужной детали на сайте можно  оспользоваться поиском, отметив номер в поисковой строке или выбрать онлайн по марке машины, указав модель и модификацию.</p>
-                <a href="#" class="main-about__link">Читать продолжение</a>
-            </div>
-            <div class="main-about__photo">
-                <img src="/storage/img/about.jpg" alt="О нас">
+        <div class="have-questions">
+            <div class="wrapper">
+                <span class="have-questions__text">Остались вопросы?</span>
+                <span class="have-questions__phone">+7 925 755 53 59</span>
+                <a href="#" class="have-questions__link"><i class="icon-font icon-phone"></i> Заказать звонок</a>
             </div>
         </div>
-    </div>
-
-    <div class="have-questions">
-        <div class="wrapper">
-            <span class="have-questions__text">Остались вопросы?</span>
-            <span class="have-questions__phone">+7 925 755 53 59</span>
-            <a href="#" class="have-questions__link"><i class="icon-font icon-phone"></i> Заказать звонок</a>
-        </div>
-    </div>
+    </main>
 @endsection
 
