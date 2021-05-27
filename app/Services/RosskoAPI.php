@@ -3,10 +3,10 @@
 
 namespace App\Services;
 
+use App\Http\Interfaces\IParser;
 use App\Models\Product;
-use GuzzleHttp\Client;
 
-class RosskoAPI
+class RosskoAPI implements IParser
 {
     private $api_key_1;
     private $api_key_2;
@@ -106,5 +106,6 @@ class RosskoAPI
             $this->response[$product->brand][] = $productModel;
         }
     }
+
 
 }

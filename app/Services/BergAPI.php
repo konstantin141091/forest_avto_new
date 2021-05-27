@@ -3,10 +3,11 @@
 
 namespace App\Services;
 
+use App\Http\Interfaces\IParser;
 use GuzzleHttp\Client;
 use App\Models\Product;
 
-class BergAPI
+class BergAPI implements IParser
 {
     private $api_key;
     private $base_url;

@@ -3,10 +3,10 @@
 
 namespace App\Services;
 
-
+use App\Http\Interfaces\IParser;
 use App\Models\Product;
 
-class AvtoPiterAPI
+class AvtoPiterAPI implements IParser
 {
     private $user_id;
     private $password;
@@ -35,42 +35,69 @@ class AvtoPiterAPI
         $this->client = new \SoapClient($connect['wsdl']);
         $this->client->Authorization($connect['login']);
         $result = $this->client->FindCatalog(['Number' => $article]);
+//        dd($result);
         if (!property_exists($result->FindCatalogResult, 'SearchCatalogModel')) {
             return [];
         }
-//        dd($result->FindCatalogResult->SearchCatalogModel);
         $this->parseProducts($result->FindCatalogResult->SearchCatalogModel);
-
+//        dd($this->response);
         return $this->response;
     }
 
+//    перебор данных ответа от апи по артиклу
     private function parseProducts($catalog_products) {
-        foreach ($catalog_products as $value) {
-            $products = $this->client->GetPriceId(['ArticleId' => $value->ArticleId]);
-            if (property_exists($products, 'GetPriceIdResult')) {
-                foreach ($products->GetPriceIdResult->PriceSearchModel as $product) {
-                    $productModel = new Product();
-                    $days = $product->NumberOfDaysSupply + 1;
-
-                    $productModel->product_id = $product->DetailUid;
-                    $productModel->article = $this->article;
-                    $productModel->name = $product->Name;
-                    $productModel->shop_name = 'авто питер';
-                    $productModel->brand_name = $product->CatalogName;
-
-                    $productModel->offers_id = $product->SellerId;
-                    $productModel->offers_name = $product->NameStatus;
-                    $productModel->offers_price = $product->SalePrice;
-                    $productModel->offers_average_period = $product->NumberOfDaysSupply;
-                    $productModel->offers_assured_period = (new \DateTime())
-                        ->add(new \DateInterval("P{$days}D"))
-                        ->format('d-m-Y');
-                    $productModel->offers_quantity = $product->NumberOfAvailable;
-
-                    $this->response[$product->CatalogName][] = $productModel;
+        if (is_array($catalog_products)) {
+            foreach ($catalog_products as $value) {
+                $products = $this->client->GetPriceId(['ArticleId' => $value->ArticleId]);
+                if (property_exists($products, 'GetPriceIdResult')) {
+                    if (is_array($products->GetPriceIdResult->PriceSearchModel)) {
+                        foreach ($products->GetPriceIdResult->PriceSearchModel as $product) {
+                            $this->createProduct($product);
+                        }
+                    } else {
+                        $product = $products->GetPriceIdResult->PriceSearchModel;
+                        $this->createProduct($product);
+                    }
                 }
             }
+        } else {
+            $products = $this->client->GetPriceId(['ArticleId' => $catalog_products->ArticleId]);
+            if (property_exists($products, 'GetPriceIdResult')) {
+                if (is_array($products->GetPriceIdResult->PriceSearchModel)) {
+                    foreach ($products->GetPriceIdResult->PriceSearchModel as $product) {
+                        $this->createProduct($product);
+                    }
+                } else {
+                    $product = $products->GetPriceIdResult->PriceSearchModel;
+                    $this->createProduct($product);
+                }
+
+            }
         }
+
+    }
+
+//    метод создает модель продукта и пушит его в response который отдаст парсинг в контроллер
+    private function createProduct($product) {
+        $productModel = new Product();
+        $days = $product->NumberOfDaysSupply + 1;
+
+        $productModel->product_id = $product->DetailUid;
+        $productModel->article = $this->article;
+        $productModel->name = $product->Name;
+        $productModel->shop_name = 'авто питер';
+        $productModel->brand_name = $product->CatalogName;
+
+        $productModel->offers_id = $product->SellerId;
+        $productModel->offers_name = $product->NameStatus;
+        $productModel->offers_price = $product->SalePrice;
+        $productModel->offers_average_period = $product->NumberOfDaysSupply;
+        $productModel->offers_assured_period = (new \DateTime())
+            ->add(new \DateInterval("P{$days}D"))
+            ->format('d-m-Y');
+        $productModel->offers_quantity = $product->NumberOfAvailable;
+
+        $this->response[$product->CatalogName][] = $productModel;
     }
 
 }
