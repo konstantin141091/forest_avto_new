@@ -30,3 +30,20 @@ Route::group([
     Route::post('/logout', 'LoginController@logout')->name('logout');
 });
 
+Route::group([
+    'prefix' => 'myCabinet21',
+    'as' => 'admin.',
+    'middleware' => 'auth',
+    'namespace' => 'Admin',
+], function() {
+    Route::get('/', 'AdminController@index')->name('index');
+
+    Route::group([
+        'prefix' => 'order',
+        'as' => 'order.'
+    ], function() {
+        Route::get('/', 'OrderController@index')->name('index');
+        Route::get('/{order}', 'OrderController@show')->name('show');
+    });
+});
+
