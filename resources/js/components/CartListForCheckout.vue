@@ -1,5 +1,11 @@
 <template>
     <aside class="order-summary__outer">
+        <div class="loader-wrapper" v-show="loading">
+            <LoaderComponent></LoaderComponent>
+        </div>
+        <div class="loader-wrapper-dark" v-show="order_created">
+            <OrderCreatedComponent :url_index="this.url_index"></OrderCreatedComponent>
+        </div>
         <div class="order-summary">
             <div class="order-summary__title"><span>Состав заказа</span> <span>{{ CART_TOTAL_QUANTITY }} товара</span></div>
 
@@ -45,13 +51,24 @@
 
 <script>
   import {mapActions, mapGetters} from "vuex/dist/vuex.mjs";
+  import LoaderComponent from './LoaderComponent';
+  import OrderCreatedComponent from './OrderCreatedComponent';
   export default {
     name: "CartListForCheckout",
+    components: {
+      LoaderComponent, OrderCreatedComponent
+    },
     props: {
       url_index: {
         required: true,
         type: String,
       }
+    },
+    data() {
+      return ({
+        loading: false,
+        order_created: false,
+      })
     },
     computed: {
       ...mapGetters ([
@@ -67,6 +84,7 @@
       ]),
 
       async createOrder() {
+        this.loading = true;
         const orderForm = await this.$root.$refs.checkoutForm.getForm();
         orderForm.total_price = this.CART_TOTAL_PRICE;
         orderForm.total_quantity = this.CART_TOTAL_QUANTITY;
@@ -80,7 +98,8 @@
         if (orderResponse.status === 201) {
           await this.$store.dispatch('CLEAR_ALL_CART');
           console.log('Всё прошло успешно. Заказ оформлен');
-          window.location.href = this.url_index;
+          this.loading = false;
+          this.order_created = true;
         }
         if (orderResponse === 409) {
           await this.$store.dispatch('CLEAR_ALL_CART');

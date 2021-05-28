@@ -10,6 +10,7 @@ Vue.component('cart-page-component', require('./components/CartPageComponent.vue
 Vue.component('cart-list-for-checkout', require('./components/CartListForCheckout.vue').default);
 Vue.component('checkout-form', require('./components/CheckoutForm.vue').default);
 Vue.component('loader-component', require('./components/LoaderComponent.vue').default);
+Vue.component('order-created-component', require('./components/OrderCreatedComponent.vue').default);
 
 new Vue({
     el: '#app',

@@ -3,9 +3,6 @@
 
 @section('content')
     <div class="order-page">
-        <div class="loader-wrapper">
-            <loader-component></loader-component>
-        </div>
         <div class="wrapper">
             <div class="order-page__body">
                 <main class="order-page-main">
