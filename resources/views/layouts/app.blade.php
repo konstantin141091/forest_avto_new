@@ -97,11 +97,5 @@
             </div>
         </div>
     </footer>
-{{--    <script src="js/jquery.min.js"></script>--}}
-{{--    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>--}}
-{{--    <script src="js/sticky.min.js"></script>--}}
-{{--    <script src="js/cleave.min.js"></script>--}}
-{{--    <script src="js/map.js"></script>--}}
-{{--    <script src="js/script.js"></script>--}}
 </body>
 </html>

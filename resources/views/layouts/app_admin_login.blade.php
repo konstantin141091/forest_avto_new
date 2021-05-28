@@ -22,10 +22,15 @@
 </head>
 <body>
 <div id="app" class="outer-wrapper">
+    <div class="login__exit">
+        <a href="{{ route('index') }}">
+            <img src="/storage/img/icons/login_exit.svg" alt="exit">
+        </a>
+    </div>
     <header class="header @yield('main-screen')">
         <div class="wrapper">
             @section('header')
-                <ul class="header__logo-cart">
+                <ul class="header__logo-cart justify-content-center">
                     <li class="logo">
                         <a href="{{ route('index') }}">
                             <img src="/storage/img/logo.svg" alt="Логотип">
@@ -33,10 +38,10 @@
                     </li>
                 </ul>
             @show
-        </div>
-    </header>
-    @yield('content')
 
+        </div>
+        @yield('content')
+    </header>
 </div>
 </body>
 </html>

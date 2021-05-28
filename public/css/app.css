@@ -3092,6 +3092,183 @@ img {
   left: 0;
 }
 
+.login {
+  width: 500px;
+  padding: 42px 50px 85px 42px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 60px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.login__form {
+  margin-top: 20px;
+}
+
+.login__title {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 44px;
+  text-align: center;
+  color: #26272D;
+}
+
+.login__label {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #26272D;
+}
+
+.login__form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.login__input {
+  background: #FFFFFF;
+  border: 1.5px solid #DCDCDC;
+  box-sizing: border-box;
+  border-radius: 5px;
+  width: 400px;
+  height: 60px;
+  padding: 0 10px;
+}
+
+.login__button {
+  background: #D63838;
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  color: #FFFFFF;
+  padding: 20px 0;
+  outline: none;
+  border: none;
+}
+
+.login__exit {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  right: 70px;
+  top: 19px;
+}
+
+@media screen and (max-width: 550px) {
+  .login {
+    width: 300px;
+  }
+
+  .login__input {
+    width: 200px;
+  }
+
+  .login__exit {
+    display: none;
+  }
+}
+
+.admin__container {
+  display: flex;
+}
+
+.admin__site-bar {
+  height: 500px;
+  width: 20%;
+  padding: 0 10px 0 5px;
+}
+
+.admin__content {
+  background-color: #fcffd2;
+  height: 500px;
+  width: 80%;
+  padding: 0 8px;
+}
+
+.admin__contacts {
+  background: #F7D7D7;
+  border-radius: 5px;
+  padding: 31px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin__contacts p {
+  margin-bottom: 7px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  color: #26272D;
+}
+
+.admin__contacts a {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #D63838;
+  text-decoration: underline;
+}
+
+.admin__menu-ul {
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin-top: 30px;
+  list-style-type: none;
+}
+
+.admin__menu-link {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  color: #26272D;
+}
+
+.admin__menu-link:hover {
+  color: #F06A6A;
+}
+
+.admin__menu-link-selected {
+  color: #D63838 !important;
+}
+
+.admin__menu-li {
+  padding: 25px 0 25px 10px;
+  border-bottom: solid 1px #E5E5E5;
+}
+
+.admin__menu-li:last-child {
+  border-bottom: none;
+}
+
+.admin__caption {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.admin__td {
+  display: flex;
+  justify-content: center;
+}
+
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
