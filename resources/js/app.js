@@ -11,6 +11,9 @@ Vue.component('cart-list-for-checkout', require('./components/CartListForCheckou
 Vue.component('checkout-form', require('./components/CheckoutForm.vue').default);
 Vue.component('loader-component', require('./components/LoaderComponent.vue').default);
 Vue.component('order-created-component', require('./components/OrderCreatedComponent.vue').default);
+Vue.component('catalog-page-component', require('./components/CatalogPageComponent.vue').default);
+Vue.component('products-list-component', require('./components/ProductsListComponent.vue').default);
+Vue.component('add-to-cart', require('./components/modals/AddToCart.vue').default);
 
 new Vue({
     el: '#app',

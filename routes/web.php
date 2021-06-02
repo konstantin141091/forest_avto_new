@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 
 //Auth::routes();
 Route::get('/', 'HomeController@index')->name('index');
-Route::post('/search', 'SearchController@index')->name('search.index');
+Route::post('/search/artikul', 'SearchController@artikul')->name('search.artikul');
+Route::post('/search/vin', 'SearchController@vin')->name('search.vin');
+Route::post('/search/frame', 'SearchController@frame')->name('search.frame');
+Route::post('/search/car', 'SearchController@car')->name('search.car');
 // cart
 Route::group([
     'prefix' => 'cart',

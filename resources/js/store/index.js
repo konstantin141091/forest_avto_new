@@ -1,10 +1,10 @@
 import cart from './modules/cart'
 import order from './modules/order'
-import modals from './modules/modals'
+import products from './modules/products'
 
 const store = {
   modules: {
-    cart, order, modals
+    cart, order, products
   }
 };
 

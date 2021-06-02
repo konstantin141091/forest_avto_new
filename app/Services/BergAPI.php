@@ -22,6 +22,7 @@ class BergAPI implements IParser
         $client = new Client();
         $response = $client->request('GET', $this->getUrlWhitArticle($article));
         $products = json_decode($response->getBody()->getContents(), true);
+//        dd($products);
         if (empty($products['resources'])) {
             return [];
         }
@@ -58,7 +59,8 @@ class BergAPI implements IParser
                     ->add(new \DateInterval("P{$days}D"))
                     ->format('d-m-Y');
                 $product->offers_quantity = $el['quantity'];
-                array_push($response[$value['brand']['name']], $product);
+//                array_push($response[$value['brand']['name']], $product);
+                array_push($response[mb_strtoupper($value['brand']['name'])], $product);
             }
         }
         return $response;

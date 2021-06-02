@@ -43,6 +43,7 @@ class RosskoAPI implements IParser
         } catch (\Exception $exception) {
             return [];
         }
+//        dd($result);
         if ($result->SearchResult->success === false) {
             return [];
         }
@@ -82,7 +83,7 @@ class RosskoAPI implements IParser
                     ->format('d-m-Y');
                 $productModel->offers_quantity = $el->count;
 
-                $this->response[$product->brand][] = $productModel;
+                $this->response[mb_strtoupper($product->brand)][] = $productModel;
             }
         } else {
             $productModel = new Product();
@@ -103,7 +104,7 @@ class RosskoAPI implements IParser
                 ->format('d-m-Y');
             $productModel->offers_quantity = $product->stocks->stock->count;
 
-            $this->response[$product->brand][] = $productModel;
+            $this->response[mb_strtoupper($product->brand)][] = $productModel;
         }
     }
 

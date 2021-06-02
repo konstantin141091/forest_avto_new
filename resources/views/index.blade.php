@@ -6,13 +6,11 @@
     @parent
     <h1 class="main-offer">Лучшие предложения автозапчастей для иномарок</h1>
     <div class="header__form">
-        <form action="{{ route('search.index') }}" method="post">
+        <form action="{{ route('search.artikul') }}" method="post">
             @csrf
             <input type="text" placeholder="Введите артикул" name="artikul" value="{{ old('artikul') }}">
             <button type="submit">Подобрать запчасти</button>
         </form>
-        {{--        ошибки валидации--}}
-{{--        TODO нужно будет внести в верстку и написать стили, пока как заглушка--}}
         @if($errors->has('artikul'))
             <div class="alert alert-danger" role="alert">
                 @foreach($errors->get('artikul') as $err)
@@ -20,6 +18,33 @@
                 @endforeach
             </div>
         @endif
+        <form action="{{ route('search.vin') }}" method="post">
+            @csrf
+            <input type="text" placeholder="Введите VIN" name="vin" value="{{ old('vin') }}">
+            <button type="submit">Подобрать запчасти</button>
+        </form>
+        @if($errors->has('vin'))
+            <div class="alert alert-danger" role="alert">
+                @foreach($errors->get('vin') as $err)
+                    {{ $err }}
+                @endforeach
+            </div>
+        @endif
+        <form action="{{ route('search.frame') }}" method="post">
+            @csrf
+            <input type="text" placeholder="Введите Frame" name="vin" value="{{ old('frame') }}">
+            <button type="submit">Подобрать запчасти</button>
+        </form>
+        @if($errors->has('frame'))
+            <div class="alert alert-danger" role="alert">
+                @foreach($errors->get('frame') as $err)
+                    {{ $err }}
+                @endforeach
+            </div>
+        @endif
+        {{--        ошибки валидации--}}
+{{--        TODO нужно будет внести в верстку и написать стили, пока как заглушка--}}
+
 
     </div>
     <ul class="header__advs advs-list">

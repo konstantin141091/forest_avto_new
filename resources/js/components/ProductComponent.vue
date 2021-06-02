@@ -1,5 +1,6 @@
 <template>
     <div class="tr">
+        <add-to-cart :messages="messages"></add-to-cart>
         <div class="td">{{ this.product.offers_quantity }}</div>
         <div class="td">{{ this.product.offers_assured_period }}</div>
         <div class="td">{{ this.product.offers_price }}₽</div>
@@ -23,16 +24,19 @@
 
 <script>
   import {mapActions} from "vuex/dist/vuex.mjs";
+  import AddToCart from "./modals/AddToCart";
   export default {
     name: "ProductComponent",
+    components: {AddToCart},
     props: {
       product: {
         required: true,
-      }
+      },
     },
     data() {
       return ({
         countQuantity: 1,
+        messages: []
       })
     },
     methods: {
@@ -40,7 +44,9 @@
         'ADD_TO_CART'
       ]),
       increment() {
-        this.countQuantity++;
+        if (this.product.offers_quantity > this.countQuantity) {
+          this.countQuantity++;
+        }
       },
       decrement() {
         if (this.countQuantity > 1) {
@@ -52,6 +58,10 @@
           product: this.product,
           countQuantity: this.countQuantity
         });
+        let timeStamp = Date.now().toLocaleString();
+        this.messages.unshift(
+          {name: 'Товар добавлен в корзину!', id: timeStamp}
+        )
       }
 
     },

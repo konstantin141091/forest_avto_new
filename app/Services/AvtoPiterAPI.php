@@ -97,7 +97,7 @@ class AvtoPiterAPI implements IParser
             ->format('d-m-Y');
         $productModel->offers_quantity = $product->NumberOfAvailable;
 
-        $this->response[$product->CatalogName][] = $productModel;
+        $this->response[mb_strtoupper($product->CatalogName)][] = $productModel;
     }
 
 }
