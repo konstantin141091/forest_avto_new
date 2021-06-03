@@ -25,11 +25,13 @@ class SearchController extends Controller
 //        dd($berg_products);
         if (!empty($berg_products)) {
             foreach ($berg_products as $brand => $value) {
-                if (!array_key_exists($brand, $products)) {
-                    $products[$brand] = [];
-                }
-                foreach ($value as $el) {
-                    array_push($products[$brand], $el);
+                if ($value && !empty($value)) {
+                    if (!array_key_exists($brand, $products)) {
+                        $products[$brand] = [];
+                    }
+                    foreach ($value as $el) {
+                        array_push($products[$brand], $el);
+                    }
                 }
             }
             $success = true;

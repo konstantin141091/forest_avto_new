@@ -38,29 +38,34 @@ class BergAPI implements IParser
     private function parseProducts($products) {
         $response = array();
         foreach ($products['resources'] as $value) {
-            $response[$value['brand']['name']] = [];
+            try {
+                $response[$value['brand']['name']] = [];
 //            dd($response);
-            foreach ($value['offers'] as $el) {
-                $days =  $el['assured_period'] + 1;
-                $product = new Product();
+                foreach ($value['offers'] as $el) {
+                    $days =  $el['assured_period'] + 1;
+                    $product = new Product();
 //            product data
-                $product->fill($value);
-                $product->product_id = $value['id'];
-                $product->shop_name = 'berg';
+                    $product->fill($value);
+                    $product->product_id = $value['id'];
+                    $product->shop_name = 'berg';
 //            brand data
-                $product->brand_id = $value['brand']['id'];
-                $product->brand_name = mb_strtoupper($value['brand']['name']);
+                    $product->brand_id = $value['brand']['id'];
+                    $product->brand_name = mb_strtoupper($value['brand']['name']);
 //            offer data
-                $product->offers_id = $el['warehouse']['id'];
-                $product->offers_name = $el['warehouse']['name'];
-                $product->offers_price = $el['price'];
-                $product->offers_average_period = $el['average_period'];
-                $product->offers_assured_period = (new \DateTime())
-                    ->add(new \DateInterval("P{$days}D"))
-                    ->format('d-m-Y');
-                $product->offers_quantity = $el['quantity'];
+                    $product->offers_id = $el['warehouse']['id'];
+                    $product->offers_name = $el['warehouse']['name'];
+                    $product->offers_price = $el['price'];
+                    $product->offers_average_period = $el['average_period'];
+                    $product->offers_assured_period = (new \DateTime())
+                        ->add(new \DateInterval("P{$days}D"))
+                        ->format('d-m-Y');
+                    $product->offers_quantity = $el['quantity'];
 //                array_push($response[$value['brand']['name']], $product);
-                array_push($response[mb_strtoupper($value['brand']['name'])], $product);
+
+                    array_push($response[mb_strtoupper($value['brand']['name'])], $product);
+                }
+            } catch (\Exception $exception) {
+
             }
         }
         return $response;
