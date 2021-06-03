@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SearchRequest;
-use App\Models\Car;
-use App\Services\LevamAPI;
 use App\Services\ParseService;
 use App\Services\PartsCatalogAPI;
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller

@@ -5,11 +5,23 @@ use Illuminate\Support\Facades\Route;
 //Auth::routes();
 Route::get('/', 'HomeController@index')->name('index');
 // роуты по поиску
-Route::post('/search/artikul', 'SearchController@artikul')->name('search.artikul');
-Route::post('/search/car', 'SearchController@findCar')->name('search.car');
-Route::post('/search/car/categories', 'SearchController@carCategories')->name('search.car.categories');
-Route::post('/search/car/catalog', 'SearchController@carCatalog')->name('search.car.catalog');
-Route::post('/search/car/catalog/parts', 'SearchController@carCatalogParts')->name('search.car.catalog.parts');
+Route::group([
+    'prefix' => 'search',
+    'as' => 'search.'
+], function() {
+    Route::post('/artikul', 'SearchController@artikul')->name('artikul');
+    Route::post('/car', 'SearchController@findCar')->name('car');
+    Route::group([
+        'prefix' => 'car',
+        'as' => 'car.'
+    ], function () {
+        Route::post('/categories', 'SearchController@carCategories')->name('categories');
+        Route::post('/catalog', 'SearchController@carCatalog')->name('catalog');
+        Route::post('/catalog/parts', 'SearchController@carCatalogParts')->name('catalog.parts');
+    });
+
+
+});
 
 // cart
 Route::group([

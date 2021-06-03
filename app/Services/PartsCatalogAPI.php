@@ -3,7 +3,6 @@
 
 namespace App\Services;
 
-
 use GuzzleHttp\Client;
 
 class PartsCatalogAPI
@@ -57,6 +56,13 @@ class PartsCatalogAPI
     }
 
     public function carCatalog($data) {
+//        $url = $this->base_url . 'catalogs/' . $data['catalogId'] . '/groups2/?carId=' . $data['carId']
+//            . '&groupId=' . $data['groupId'] . '&criteria=' . $data['criteria'];
+//        $request = $this->client->get($url, [
+//            \GuzzleHttp\RequestOptions::HEADERS => $this->getHeaders()
+//        ]);
+//        $catalog = json_decode($request->getBody()->getContents(), true);
+//        dd($catalog);
         try {
             $url = $this->base_url . 'catalogs/' . $data['catalogId'] . '/groups2/?carId=' . $data['carId']
                 . '&groupId=' . $data['groupId'] . '&criteria=' . $data['criteria'];
@@ -71,6 +77,13 @@ class PartsCatalogAPI
     }
 
     public function carCatalogParts($data) {
+//        $url = $this->base_url . 'catalogs/' . $data['catalogId'] . '/parts2?carId=' . $data['carId'] . '&groupId=' .
+//            $data['groupId'] . '&criteria=' . $data['criteria'];
+//        $request = $this->client->get($url, [
+//            \GuzzleHttp\RequestOptions::HEADERS => $this->getHeaders()
+//        ]);
+//        $parts = json_decode($request->getBody()->getContents(), true);
+//        dd($parts);
         try {
             $url = $this->base_url . 'catalogs/' . $data['catalogId'] . '/parts2?carId=' . $data['carId'] . '&groupId=' .
                 $data['groupId'] . '&criteria=' . $data['criteria'];

@@ -27,15 +27,27 @@
                         <div>
                             <p>{{ $value['name'] }}</p>
                             <img src="{{ $value['img'] }}" alt="parts">
-                            <form action="{{ route('search.car.catalog.parts') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="catalogId" value="{{ $data['catalogId'] }}">
-                                <input type="hidden" name="carId" value="{{ $data['carId'] }}">
-                                <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">
-                                <input type="hidden" name="groupId" value="{{ $value['id'] }}">
-{{--                                <input type="hidden" name="img " value="{{ $value['img'] }}">--}}
-                                <button type="submit">Подробнее</button>
-                            </form>
+                            @if($value['hasParts'])
+                                <form action="{{ route('search.car.catalog.parts') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="catalogId" value="{{ $data['catalogId'] }}">
+                                    <input type="hidden" name="carId" value="{{ $data['carId'] }}">
+                                    <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">
+                                    <input type="hidden" name="groupId" value="{{ $value['id'] }}">
+                                    {{--                                <input type="hidden" name="img " value="{{ $value['img'] }}">--}}
+                                    <button type="submit">Подробнее</button>
+                                </form>
+                            @else
+                                <form action="{{ route('search.car.catalog') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="catalogId" value="{{ $data['catalogId'] }}">
+                                    <input type="hidden" name="carId" value="{{ $data['carId'] }}">
+                                    <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">
+                                    <input type="hidden" name="groupId" value="{{ $value['id'] }}">
+                                    {{--                                <input type="hidden" name="img " value="{{ $value['img'] }}">--}}
+                                    <button type="submit">Подробнее</button>
+                                </form>
+                            @endif
                             <hr>
                         </div>
                     @endforeach

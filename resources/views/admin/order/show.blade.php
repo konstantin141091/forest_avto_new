@@ -16,7 +16,11 @@
         @forelse($products as $product)
             <div>
                 <p>Артикул товара: {{ $product->article }}</p>
+                <p>ID в магазине: {{ $product->product_id }}</p>
+                <p>ID склада в магазине: {{ $product->offers_id }}</p>
+                <p>Название склада в магазине: {{ $product->offers_name }}</p>
                 <p>Название товара: {{ $product->name }}</p>
+                <p>Бренд товара: {{ $product->brand_name }}</p>
                 <p>Название магазина: {{ $product->shop_name }}</p>
                 <p>Количество: {{ $product->quantity }}</p>
                 <p>Цена за товар: {{ $product->offers_price }}</p>
