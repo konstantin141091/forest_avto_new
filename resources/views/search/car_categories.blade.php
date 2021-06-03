@@ -23,21 +23,16 @@
             </ul>
             @if($success)
                 <div>
-                    @foreach($catalog as $value)
-                        <div>
-                            <p>{{ $value['name'] }}</p>
-                            <img src="{{ $value['img'] }}" alt="parts">
-                            <form action="{{ route('search.car.catalog.parts') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="catalogId" value="{{ $data['catalogId'] }}">
-                                <input type="hidden" name="carId" value="{{ $data['carId'] }}">
-                                <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">
-                                <input type="hidden" name="groupId" value="{{ $value['id'] }}">
-{{--                                <input type="hidden" name="img " value="{{ $value['img'] }}">--}}
-                                <button type="submit">Подробнее</button>
-                            </form>
-                            <hr>
-                        </div>
+                    @foreach($categories as $catalog)
+                        <p>{{ $catalog['name'] }}</p>
+                        <form action="{{ route('search.car.catalog') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="groupId" value="{{ $catalog['id'] }}">
+                            <input type="hidden" name="catalogId" value="{{ $data['catalogId'] }}">
+                            <input type="hidden" name="carId" value="{{ $data['carId'] }}">
+                            <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">
+                            <button type="submit">Подробнее</button>
+                        </form>
                     @endforeach
                 </div>
             @else

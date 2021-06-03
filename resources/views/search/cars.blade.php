@@ -25,11 +25,23 @@
                 <div class="search-results">
                     @forelse($cars as $car)
                         <div>
-                            <p>{{ $car->mark }} {{ $car->model }}</p>
-                            <form action="{{ route('search.car') }}" method="POST">
+                            <p>
+                                Название: {{ $car['brand'] }} {{ $car['title'] }}
+                                @foreach($car['parameters'] as $value)
+                                    @if($value['key'] === 'year')
+
+                                        {{ $value['value'] }} год
+                                    @endif
+                                @endforeach
+                            </p>
+                            <p>Здесь можно еще доп инфу вывести, двигатель, тип корбки передач</p>
+                            <form action="{{ route('search.car.categories') }}" method="POST">
                                 @csrf
-                                <input type="hidden" name="ssd" value="{{ $car->ssd }}">
-                                <input type="hidden" name="link" value="{{ $car->link }}">
+                                <input type="hidden" name="catalogId" value="{{ $car['catalogId'] }}">
+                                <input type="hidden" name="carId" value="{{ $car['carId'] }}">
+                                <input type="hidden" name="criteria" value="{{ $car['criteria'] }}">
+                                <input type="hidden" name="frame" value="{{ $car['frame'] }}">
+                                <input type="hidden" name="vin" value="{{ $car['vin'] }}">
                                 <button type="submit">Подробнее</button>
                             </form>
                         </div>

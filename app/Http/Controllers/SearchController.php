@@ -6,6 +6,7 @@ use App\Http\Requests\SearchRequest;
 use App\Models\Car;
 use App\Services\LevamAPI;
 use App\Services\ParseService;
+use App\Services\PartsCatalogAPI;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
@@ -71,62 +72,84 @@ class SearchController extends Controller
         ]);
     }
 
-    public function vin(Request $request) {
+    public function findCar(Request $request) {
         $request->flash();
         $success = false;
-        $vin = $request->vin;
+        $search = $request->search;
+        $partsCatalog = new PartsCatalogAPI();
+        $cars = $partsCatalog->findCar($search);
 
-        $client = new Client();
-//        $res = $client->get('https://api.parts-catalogs.com/v1/ip/');
-//        dd(json_decode($res->getBody()->getContents(), true));
-        $url = 'https://api.parts-catalogs.com/v1/car/info?q=AT211-0080320';
-        $request = $client->get($url, [
-            \GuzzleHttp\RequestOptions::HEADERS => [
-                'Accept'       => 'application/json',
-                'Accept-Language' => 'ru',
-                'Authorization' => 'OEM-API-9C409586-3F27-45D7-8E2E-306F7CA555FD'
-            ]
-        ]);
-        dd($request);
-
-
-
-
-
-//        $pars_service = new LevamAPI();
-//        $cars = $pars_service->findVin($vin);
-//        if (!empty($cars)) {
-//            $success = true;
-//        }
-////        dd($cars);
-//        return view('search.cars', [
-//            'cars' => $cars,
-//            'success' => $success,
-//        ]);
-    }
-
-    public function frame(Request $request) {
-//        $request->flash();
-//        $vin = $request->frame;
-//        $pars_service = new LevamAPI();
-//        $catalog = $pars_service->findVin($vin);
-//        dd($catalog);
-    }
-
-    public function car(Request $request) {
-        $success = false;
-        $ssd = $request->ssd;
-        $link = $request->link;
-        $pars_service = new LevamAPI();
-        $car = $pars_service->treeGet($ssd, $link);
-//        dd($car);
-        if ($car) {
+        if ($cars) {
             $success = true;
         }
-
-        return view('search.car_catalog', [
-            'car' => $car,
+//        dd($cars);
+        return view('search.cars', [
+            'cars' => $cars,
             'success' => $success,
         ]);
     }
+
+    public function carCategories(Request $request) {
+        $success = false;
+        $data = [
+            'catalogId' => $request->catalogId,
+            'carId' => $request->carId,
+            'criteria' => $request->criteria,
+            'frame' => $request->frame,
+            'vin' => $request->vin,
+        ];
+        $partsCatalog = new PartsCatalogAPI();
+        $categories = $partsCatalog->carCategories($data);
+        if ($categories) {
+            $success = true;
+        }
+//        dd($catalog);
+        return view('search.car_categories', [
+            'categories' => $categories,
+            'data' => $data,
+            'success' => $success,
+        ]);
+    }
+
+    public function carCatalog(Request $request) {
+        $success = false;
+        $data = [
+            'catalogId' => $request->catalogId,
+            'carId' => $request->carId,
+            'criteria' => $request->criteria,
+            'groupId' => $request->groupId,
+        ];
+        $partsCatalog = new PartsCatalogAPI();
+        $catalog = $partsCatalog->carCatalog($data);
+        if ($catalog) {
+            $success = true;
+        }
+//        dd($catalog);
+        return view('search.car_catalog', [
+            'catalog' => $catalog,
+            'data' => $data,
+            'success' => $success,
+        ]);
+    }
+
+    public function carCatalogParts(Request $request) {
+        $success = false;
+        $data = [
+            'catalogId' => $request->catalogId,
+            'carId' => $request->carId,
+            'criteria' => $request->criteria,
+            'groupId' => $request->groupId,
+        ];
+        $partsCatalog = new PartsCatalogAPI();
+        $parts = $partsCatalog->carCatalogParts($data);
+//        dd($parts);
+        if ($parts) {
+            $success = true;
+        }
+        return view('search.car_catalog_parts', [
+            'parts' => $parts,
+            'success' => $success,
+        ]);
+    }
+
 }

@@ -18,30 +18,35 @@
                 @endforeach
             </div>
         @endif
-        <form action="{{ route('search.vin') }}" method="post">
+
+        <form action="{{ route('search.car') }}" method="post">
             @csrf
-            <input type="text" placeholder="Введите VIN" name="vin" value="{{ old('vin') }}">
+            <input type="text" placeholder="Введите VIN или номер кузова" name="search" value="{{ old('search') }}">
             <button type="submit">Подобрать запчасти</button>
         </form>
-        @if($errors->has('vin'))
+        @if($errors->has('search'))
             <div class="alert alert-danger" role="alert">
-                @foreach($errors->get('vin') as $err)
+                @foreach($errors->get('search') as $err)
                     {{ $err }}
                 @endforeach
             </div>
         @endif
-        <form action="{{ route('search.frame') }}" method="post">
-            @csrf
-            <input type="text" placeholder="Введите Frame" name="vin" value="{{ old('frame') }}">
-            <button type="submit">Подобрать запчасти</button>
-        </form>
-        @if($errors->has('frame'))
-            <div class="alert alert-danger" role="alert">
-                @foreach($errors->get('frame') as $err)
-                    {{ $err }}
-                @endforeach
-            </div>
-        @endif
+
+
+
+
+{{--        <form action="{{ route('search.frame') }}" method="post">--}}
+{{--            @csrf--}}
+{{--            <input type="text" placeholder="Введите Frame" name="vin" value="{{ old('frame') }}">--}}
+{{--            <button type="submit">Подобрать запчасти</button>--}}
+{{--        </form>--}}
+{{--        @if($errors->has('frame'))--}}
+{{--            <div class="alert alert-danger" role="alert">--}}
+{{--                @foreach($errors->get('frame') as $err)--}}
+{{--                    {{ $err }}--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
+{{--        @endif--}}
         {{--        ошибки валидации--}}
 {{--        TODO нужно будет внести в верстку и написать стили, пока как заглушка--}}
 
