@@ -72,7 +72,7 @@ class RosskoAPI implements IParser
                 $productModel->name = $product->name;
                 $productModel->shop_name = 'росско';
                 $productModel->partnumber = $product->partnumber;
-                $productModel->brand_name = $product->brand;
+                $productModel->brand_name = mb_strtoupper($product->brand);
 
                 $productModel->offers_id = $el->id;
                 $productModel->offers_name = $el->description;
@@ -93,7 +93,7 @@ class RosskoAPI implements IParser
             $productModel->name = $product->name;
             $productModel->shop_name = 'росско';
             $productModel->partnumber = $product->partnumber;
-            $productModel->brand_name = $product->brand;
+            $productModel->brand_name = mb_strtoupper($product->brand);
 
             $productModel->offers_id = $product->stocks->stock->id;
             $productModel->offers_name = $product->stocks->stock->description;

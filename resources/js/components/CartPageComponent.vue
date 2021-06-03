@@ -119,7 +119,9 @@
         'ACTION_INCREMENT_INDEX', 'ACTION_DECREMENT_INDEX', 'ACTION_DELETE_FROM_CART_INDEX', 'CLEAR_ALL_CART'
       ]),
       incrementCart(index) {
-        this.ACTION_INCREMENT_INDEX(index);
+        if (this.cartList[index].quantity < this.cartList[index].offers_quantity) {
+          this.ACTION_INCREMENT_INDEX(index);
+        }
       },
       decrementCart(index) {
         this.ACTION_DECREMENT_INDEX(index);

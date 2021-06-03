@@ -22,6 +22,7 @@ class SearchController extends Controller
 
 //        берг products
         $berg_products = $pars_service->bergApi->getProductsWhitArticle($article);
+//        dd($berg_products);
         if (!empty($berg_products)) {
             foreach ($berg_products as $brand => $value) {
                 if (!array_key_exists($brand, $products)) {
@@ -51,6 +52,7 @@ class SearchController extends Controller
         }
 // avtopiter products
         $avto_piter_products = $pars_service->avtoPiterApi->getProductsWhitArticle($article);
+//        dd($avto_piter_products);
         if (!empty($avto_piter_products)) {
             foreach ($avto_piter_products as $brand => $value) {
                 if (!array_key_exists($brand, $products)) {
@@ -62,10 +64,7 @@ class SearchController extends Controller
             }
             $success = true;
         }
-
 //        dd($products);
-//        $products = json_encode($products);
-
         return view('search.products', [
             'products' => $products,
             'success' => $success,

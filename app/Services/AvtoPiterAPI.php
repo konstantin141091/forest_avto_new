@@ -86,7 +86,7 @@ class AvtoPiterAPI implements IParser
         $productModel->article = $this->article;
         $productModel->name = $product->Name;
         $productModel->shop_name = 'авто питер';
-        $productModel->brand_name = $product->CatalogName;
+        $productModel->brand_name = mb_strtoupper($product->CatalogName);
 
         $productModel->offers_id = $product->SellerId;
         $productModel->offers_name = $product->NameStatus;

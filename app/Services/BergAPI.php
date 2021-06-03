@@ -49,7 +49,7 @@ class BergAPI implements IParser
                 $product->shop_name = 'berg';
 //            brand data
                 $product->brand_id = $value['brand']['id'];
-                $product->brand_name = $value['brand']['name'];
+                $product->brand_name = mb_strtoupper($value['brand']['name']);
 //            offer data
                 $product->offers_id = $el['warehouse']['id'];
                 $product->offers_name = $el['warehouse']['name'];

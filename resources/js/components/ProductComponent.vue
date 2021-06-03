@@ -8,14 +8,12 @@
             <div class="vue-product">
                 <div class="count-group">
 <!--                    TODO span шт убрал из интупа, здесь надо поравить верстку, позиционирование-->
-<!--                    <span>.шт</span>-->
                     <span class="dec" @click="decrement()">-</span>
-<!--                    <input type="number" v-model="this.countQuantity">-->
                     <div class="vue-product__quantity">{{ this.countQuantity }} шт.</div>
                     <span class="inc" @click="increment()">+</span>
                 </div>
                 <button class="btn-buy" type="submit" @click="add()">
-                    <i class="icon-font icon-cart"></i> Купить
+                    <i class="icon-font icon-cart"></i> Добавить
                 </button>
             </div>
         </div>
@@ -23,7 +21,7 @@
 </template>
 
 <script>
-  import {mapActions} from "vuex/dist/vuex.mjs";
+  import {mapActions, mapGetters} from "vuex/dist/vuex.mjs";
   import AddToCart from "./modals/AddToCart";
   export default {
     name: "ProductComponent",
@@ -32,6 +30,9 @@
       product: {
         required: true,
       },
+      index: {
+        required: true,
+      }
     },
     data() {
       return ({
@@ -43,16 +44,19 @@
       ...mapActions([
         'ADD_TO_CART'
       ]),
+
       increment() {
         if (this.product.offers_quantity > this.countQuantity) {
           this.countQuantity++;
         }
       },
+
       decrement() {
         if (this.countQuantity > 1) {
           this.countQuantity--;
         }
       },
+
       add() {
         this.ADD_TO_CART({
           product: this.product,
@@ -63,6 +67,8 @@
           {name: 'Товар добавлен в корзину!', id: timeStamp}
         )
       }
+    },
+    computed: {
 
     },
   }
