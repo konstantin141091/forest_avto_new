@@ -42,7 +42,7 @@
 
             <footer class="order-summary__footer">
                 <div class="order-summary__sum"><span>Итого:</span><span>{{ CART_TOTAL_PRICE }} ₽</span></div>
-                <button disabled class="btn btn_filled order-summary__btn" id="cart_btn" @click="createOrder">Оформить заказ</button>
+                <button disabled class="btn btn_filled order-summary__btn vue-btn" id="cart_btn" @click="createOrder">Оформить заказ</button>
             </footer>
         </div>
     </aside>
@@ -111,6 +111,11 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+    @media screen and (max-width: 440px){
+        .vue-btn {
+            line-height: 0;
+        }
+    }
 
 </style>
