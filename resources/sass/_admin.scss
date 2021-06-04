@@ -8,7 +8,6 @@
     padding: 0 10px 0 5px;
   }
   &__content {
-    background-color: #fcffd2;
     height: 500px;
     width: 80%;
     padding: 0 8px;
@@ -70,9 +69,48 @@
     display: flex;
     justify-content: center;
     text-align: center;
+    padding: 3% 1px!important;
+    &-id {
+      width: 7%!important;
+    }
+    &-status {
+      width: 19%!important;
+    }
+    &-name {
+      width: 22%!important;
+    }
+    &-price {
+      width: 19%!important;
+    }
+    &-date {
+      width: 19%!important;
+    }
+    &-more {
+      width: 14%;
+    }
   }
   &__td {
     display: flex;
     justify-content: center;
+    padding: 3% 1px!important;
+    text-align: center;
+    &-id {
+      width: 7%!important;
+    }
+    &-status {
+      width: 19%!important;
+    }
+    &-name {
+      width: 22%!important;
+    }
+    &-price {
+      width: 19%!important;
+    }
+    &-date {
+      width: 19%!important;
+    }
+    &-more {
+      width: 14%;
+    }
   }
 }

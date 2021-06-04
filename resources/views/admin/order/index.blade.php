@@ -36,43 +36,43 @@
                         <div class="result-table">
                             <div class="stocks-info-td">
                                 <div class="tr">
-                                    <div class="caption admin__caption">
+                                    <div class="caption admin__caption admin__caption-id">
                                         Номер<br>заказа
                                     </div>
-                                    <div class="caption admin__caption">
+                                    <div class="caption admin__caption admin__caption-status">
                                         Статус<br>заказа
                                     </div>
-                                    <div class="caption admin__caption">
+                                    <div class="caption admin__caption admin__caption-name">
                                         Имя<br>заказчика
                                     </div>
-                                    <div class="caption admin__caption">
+                                    <div class="caption admin__caption admin__caption-price">
                                         Сумма<br>заказа
                                     </div>
-                                    <div class="caption admin__caption">
+                                    <div class="caption admin__caption admin__caption-date">
                                         Дата<br>оформления
                                     </div>
-                                    <div class="caption admin__caption">
+                                    <div class="caption admin__caption admin__caption-more">
                                         Подробнее
                                     </div>
                                 </div>
                                 @forelse($orders as $order)
                                 <div class="tr">
-                                    <div class="td admin__td">
+                                    <div class="td admin__td admin__td-id">
                                         {{ $order->id }}
                                     </div>
-                                    <div class="td admin__td">
+                                    <div class="td admin__td admin__td-status">
                                         {{ $order->status }}
                                     </div>
-                                    <div class="td admin__td">
+                                    <div class="td admin__td admin__td-name">
                                         {{ $order->name }}
                                     </div>
-                                    <div class="td">
+                                    <div class="td admin__td admin__td-price">
                                         {{ $order->total_price }}
                                     </div>
-                                    <div class="td admin__td">
+                                    <div class="td admin__td admin__td-date">
                                         {{ $order->created_at }}
                                     </div>
-                                    <div class="td admin__td">
+                                    <div class="td admin__td admin__td-more">
                                         <a href="{{ route('admin.order.show', $order) }}">
                                             Посмотреть заказ
                                         </a>

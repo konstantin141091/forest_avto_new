@@ -3193,7 +3193,6 @@ img {
 }
 
 .admin__content {
-  background-color: #fcffd2;
   height: 500px;
   width: 80%;
   padding: 0 8px;
@@ -3265,11 +3264,62 @@ img {
   display: flex;
   justify-content: center;
   text-align: center;
+  padding: 3% 1px !important;
+}
+
+.admin__caption-id {
+  width: 7% !important;
+}
+
+.admin__caption-status {
+  width: 19% !important;
+}
+
+.admin__caption-name {
+  width: 22% !important;
+}
+
+.admin__caption-price {
+  width: 19% !important;
+}
+
+.admin__caption-date {
+  width: 19% !important;
+}
+
+.admin__caption-more {
+  width: 14%;
 }
 
 .admin__td {
   display: flex;
   justify-content: center;
+  padding: 3% 1px !important;
+  text-align: center;
+}
+
+.admin__td-id {
+  width: 7% !important;
+}
+
+.admin__td-status {
+  width: 19% !important;
+}
+
+.admin__td-name {
+  width: 22% !important;
+}
+
+.admin__td-price {
+  width: 19% !important;
+}
+
+.admin__td-date {
+  width: 19% !important;
+}
+
+.admin__td-more {
+  width: 14%;
 }
 
 @media screen and (max-width: 991px) {
