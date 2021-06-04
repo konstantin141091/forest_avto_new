@@ -1,13 +1,12 @@
 <template>
     <div class="tr">
         <add-to-cart :messages="messages"></add-to-cart>
-        <div class="td">{{ this.product.offers_quantity }}</div>
-        <div class="td">{{ this.product.offers_assured_period }}</div>
-        <div class="td">{{ this.product.offers_price }}₽</div>
-        <div class="td">
+        <div class="td vue-td__quantity">{{ this.product.offers_quantity }}</div>
+        <div class="td vue-td__date">{{ this.product.offers_assured_period }}</div>
+        <div class="td vue-td__price">{{ this.product.offers_price }}₽</div>
+        <div class="td vue-td__buy">
             <div class="vue-product">
                 <div class="count-group">
-<!--                    TODO span шт убрал из интупа, здесь надо поравить верстку, позиционирование-->
                     <span class="dec" @click="decrement()">-</span>
                     <div class="vue-product__quantity">{{ this.countQuantity }} шт.</div>
                     <span class="inc" @click="increment()">+</span>
@@ -81,17 +80,20 @@
         width: 100%;
         justify-content: space-between;
         flex-wrap: wrap;
-        /*&__quantity {*/
-        /*    display: flex;*/
-        /*    justify-content: center;*/
-        /*    align-items: center;*/
-        /*    margin-top: 4%;*/
-        /*}*/
     }
     .vue-product__quantity {
         display: flex;
         justify-content: center;
         align-items: center;
         margin-top: 4%;
+    }
+
+    @media screen and (max-width: 1200px){
+        .vue-product {
+            justify-content: center;
+        }
+        .btn-buy {
+            margin: 10px 0 0 0;
+        }
     }
 </style>

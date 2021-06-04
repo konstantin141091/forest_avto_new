@@ -1,0 +1,36 @@
+@media screen and (max-width: 991px){
+  .vue-td__quantity, .vue-td__date, .vue-td__price {
+    padding: 0!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .vue-td {
+    &__quantity {
+      width: 20%!important;
+    }
+    &__date {
+      width: 30%!important;
+    }
+    &__price {
+      width: 20%!important;
+    }
+    &__buy {
+      width: 30% !important;
+      padding: 3% 1% !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+@media screen and (max-width: 400px){
+  .result-table {
+    font-size: 12px;
+    & button {
+      padding: 12px 3px;
+    }
+  }
+}

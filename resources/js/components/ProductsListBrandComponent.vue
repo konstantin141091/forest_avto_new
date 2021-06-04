@@ -15,10 +15,10 @@
         </div>
         <div class="stocks-info-td">
             <div class="tr">
-                <div class="caption">Наличие</div>
-                <div class="caption">Дата доставки</div>
-                <div class="caption">Цена</div>
-                <div class="caption">Кол-во</div>
+                <div class="caption vue-caption__quantity">Наличие</div>
+                <div class="caption vue-caption__date">Дата доставки</div>
+                <div class="caption vue-caption__price">Цена</div>
+                <div class="caption vue-caption__buy">Кол-во</div>
             </div>
             <ProductComponent v-for="(product, index) in brand" :product="product" :index="index" v-if="index < paginate"></ProductComponent>
             <div class="vue-paginate" v-show="paginateClick">
@@ -78,6 +78,34 @@
         p:hover {
             color: #F06A6A;
         }
+    }
+    @media screen and(max-width: 991px) {
+        .vue-caption__buy, .vue-caption__quantity, .vue-caption__price, .vue-caption__date {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3% 0;
+        }
+        .vue-caption {
+            &__quantity {
+                width: 20%!important;
+            }
+            &__date {
+                width: 30% !important;
+                text-align: center;
+            }
+            &__price {
+                width: 20% !important;
+            }
+            &__buy {
+                width: 30% !important;
+            }
+        }
+    }
 
+    @media screen and (max-width: 767px){
+        .product-info-td {
+            width: 100%;
+        }
     }
 </style>
