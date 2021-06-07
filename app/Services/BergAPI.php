@@ -7,10 +7,11 @@ use App\Http\Interfaces\IParser;
 use GuzzleHttp\Client;
 use App\Models\Product;
 
-class BergAPI implements IParser
+class BergAPI extends ParseService implements IParser
 {
     private $api_key;
     private $base_url;
+    private $products;
 
     public function __construct()
     {
@@ -18,25 +19,31 @@ class BergAPI implements IParser
         $this->base_url = env('BERG_STOCK_REQUEST_URL');
     }
 
-    public function getProductsWhitArticle(string $article) {
-        $client = new Client();
-        $response = $client->request('GET', $this->getUrlWhitArticle($article));
-        $products = json_decode($response->getBody()->getContents(), true);
-//        dd($products);
-        if (empty($products['resources'])) {
-            return [];
+    public function getProductsWhitArticle(string $article, array $products) {
+        try {
+            $this->products = $products;
+            $client = new Client();
+            $response = $client->request('GET', $this->getUrlWhitArticle($article));
+            $result = json_decode($response->getBody()->getContents(), true);
+
+        } catch (\Exception $exception) {
+            return $products;
+            // если не удалось получить товары от api, то массив products не заполниться от этого сайта
         }
-        $products = $this->parseProducts($products);
-        return $products;
+
+        if (!empty($products['resources'])) {
+            $this->parseProducts($result, 'original');
+        }
+//        dd($this->products);
+        return $this->products;
     }
 
-    private function getUrlWhitArticle($article) {
+    private function getUrlWhitArticle(string $article) {
         $url = $this->base_url.'?items[0][resource_article]='.$article.'&key='.$this->api_key;
         return $url;
     }
 
-    private function parseProducts($products) {
-        $response = array();
+    private function parseProducts($products, string $type) {
         foreach ($products['resources'] as $value) {
             try {
                 $response[$value['brand']['name']] = [];
@@ -60,14 +67,11 @@ class BergAPI implements IParser
                         ->add(new \DateInterval("P{$days}D"))
                         ->format('d-m-Y');
                     $product->offers_quantity = $el['quantity'];
-//                array_push($response[$value['brand']['name']], $product);
-
-                    array_push($response[mb_strtoupper($value['brand']['name'])], $product);
+                    $this->products[$type][mb_strtoupper($value['brand']['name'])][] = $product;
                 }
             } catch (\Exception $exception) {
-
+                // если модель продукта не создалась и не добавилась, то просто ничего не будет
             }
         }
-        return $response;
     }
 }

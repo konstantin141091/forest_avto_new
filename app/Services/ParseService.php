@@ -8,6 +8,7 @@ class ParseService
     public $bergApi;
     public $rosskoApi;
     public $avtoPiterApi;
+//    public $products = [];
 
     public function __construct()
     {
@@ -16,4 +17,7 @@ class ParseService
         $this->avtoPiterApi = new AvtoPiterAPI();
     }
 
+//    public function getProducts() {
+//        return $this->products;
+//    }
 }

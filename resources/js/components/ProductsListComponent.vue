@@ -17,6 +17,9 @@
     props: {
       products: {
         required: true,
+      },
+      type: {
+        required: true,
       }
     },
     data() {

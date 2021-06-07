@@ -2662,6 +2662,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProductSortComponent",
+  props: {
+    type: {
+      required: true
+    }
+  },
   data: function data() {
     return {
       price: false,
@@ -2670,12 +2675,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     sortByPrice: function sortByPrice() {
-      this.$root.$refs.productList.sortByPrice();
+      if (this.type === 'original') {
+        this.$root.$refs.productListOriginal.sortByPrice();
+      } else {
+        this.$root.$refs.productListAnalog.sortByPrice();
+      }
+
       this.price = true;
       this.date = false;
     },
     sortByDate: function sortByDate() {
-      this.$root.$refs.productList.sortByDate();
+      if (this.type === 'original') {
+        this.$root.$refs.productListOriginal.sortByDate();
+      } else {
+        this.$root.$refs.productListAnalog.sortByDate();
+      }
+
       this.price = false;
       this.date = true;
     }
@@ -2785,6 +2800,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     products: {
+      required: true
+    },
+    type: {
       required: true
     }
   },

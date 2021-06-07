@@ -10,6 +10,11 @@
 <script>
   export default {
     name: "ProductSortComponent",
+    props: {
+      type: {
+        required: true,
+      }
+    },
     data() {
       return {
         price: false,
@@ -18,12 +23,20 @@
     },
     methods: {
       sortByPrice() {
-        this.$root.$refs.productList.sortByPrice();
+        if (this.type === 'original') {
+          this.$root.$refs.productListOriginal.sortByPrice();
+        } else {
+          this.$root.$refs.productListAnalog.sortByPrice();
+        }
         this.price = true;
         this.date = false;
       },
       sortByDate() {
-        this.$root.$refs.productList.sortByDate();
+        if (this.type === 'original') {
+          this.$root.$refs.productListOriginal.sortByDate();
+        } else {
+          this.$root.$refs.productListAnalog.sortByDate();
+        }
         this.price = false;
         this.date = true;
       }

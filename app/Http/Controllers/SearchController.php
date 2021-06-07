@@ -17,55 +17,24 @@ class SearchController extends Controller
         $products = [];
         $pars_service = new ParseService();
 
-//        берг products
-        $berg_products = $pars_service->bergApi->getProductsWhitArticle($article);
-//        dd($berg_products);
-        if (!empty($berg_products)) {
-            foreach ($berg_products as $brand => $value) {
-                if ($value && !empty($value)) {
-                    if (!array_key_exists($brand, $products)) {
-                        $products[$brand] = [];
-                    }
-                    foreach ($value as $el) {
-                        array_push($products[$brand], $el);
-                    }
-                }
-            }
-            $success = true;
-//            dd($products);
-        }
-// rossko products
-        $rossko_products = $pars_service->rosskoApi->getProductsWhitArticle($article);
-//        dd($rossko_products);
-        if (!empty($rossko_products)) {
-            foreach ($rossko_products as $brand => $value) {
-                if (!array_key_exists($brand, $products)) {
-                    $products[$brand] = [];
-                }
-                foreach ($value as $el) {
-                    array_push($products[$brand], $el);
-                }
-            }
-            $success = true;
-//            dd($products);
-        }
-// avtopiter products
-        $avto_piter_products = $pars_service->avtoPiterApi->getProductsWhitArticle($article);
-//        dd($avto_piter_products);
-        if (!empty($avto_piter_products)) {
-            foreach ($avto_piter_products as $brand => $value) {
-                if (!array_key_exists($brand, $products)) {
-                    $products[$brand] = [];
-                }
-                foreach ($value as $el) {
-                    array_push($products[$brand], $el);
-                }
-            }
+        // avtopiter products
+        $products = $pars_service->avtoPiterApi->getProductsWhitArticle($article, $products);
+
+        // berg products
+        $products = $pars_service->bergApi->getProductsWhitArticle($article, $products);
+
+        // rossko products
+        $products = $pars_service->rosskoApi->getProductsWhitArticle($article, $products);
+
+        if(!empty($products)) {
             $success = true;
         }
+
 //        dd($products);
+
         return view('search.products', [
             'products' => $products,
+            'article' => $article,
             'success' => $success,
         ]);
     }

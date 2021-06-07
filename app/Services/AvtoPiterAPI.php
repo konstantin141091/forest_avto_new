@@ -12,7 +12,7 @@ class AvtoPiterAPI implements IParser
     private $password;
     private $base_url;
     private $client;
-    private $response = array();
+    private $products;
     private $article;
 
     public function __construct()
@@ -22,8 +22,9 @@ class AvtoPiterAPI implements IParser
         $this->base_url = env('AVTOPITER_BASE_URL');
     }
 
-    public function getProductsWhitArticle(string $article) {
+    public function getProductsWhitArticle(string $article, array $products) {
         $this->article = $article;
+        $this->products = $products;
         $connect = [
             'wsdl' => 'http://service.autopiter.ru/v2/price?WSDL',
             'login' => [
@@ -40,45 +41,73 @@ class AvtoPiterAPI implements IParser
             return [];
         }
         $this->parseProducts($result->FindCatalogResult->SearchCatalogModel);
-//        dd($this->response);
-        return $this->response;
+//        dd($this->products);
+        return $this->products;
     }
 
 //    перебор данных ответа от апи по артиклу
     private function parseProducts($catalog_products) {
         if (is_array($catalog_products)) {
             foreach ($catalog_products as $value) {
-                $products = $this->client->GetPriceId(['ArticleId' => $value->ArticleId]);
-                if (property_exists($products, 'GetPriceIdResult')) {
-                    if (is_array($products->GetPriceIdResult->PriceSearchModel)) {
-                        foreach ($products->GetPriceIdResult->PriceSearchModel as $product) {
-                            $this->createProduct($product);
+                // поиск оригиналов
+                $original = $this->client->GetPriceId(['ArticleId' => $value->ArticleId]);
+                if (property_exists($original, 'GetPriceIdResult')) {
+                    if (is_array($original->GetPriceIdResult->PriceSearchModel)) {
+                        foreach ($original->GetPriceIdResult->PriceSearchModel as $product) {
+                            $this->createProduct($product, 'original');
                         }
                     } else {
-                        $product = $products->GetPriceIdResult->PriceSearchModel;
-                        $this->createProduct($product);
+                        $product = $original->GetPriceIdResult->PriceSearchModel;
+                        $this->createProduct($product, 'original');
                     }
                 }
-            }
-        } else {
-            $products = $this->client->GetPriceId(['ArticleId' => $catalog_products->ArticleId]);
-            if (property_exists($products, 'GetPriceIdResult')) {
-                if (is_array($products->GetPriceIdResult->PriceSearchModel)) {
-                    foreach ($products->GetPriceIdResult->PriceSearchModel as $product) {
-                        $this->createProduct($product);
+
+                // поиск аналогов
+                $analogs = $this->client->GetPriceId(['ArticleId' => $value->ArticleId, 'SearchCross' => 1]);
+                if (property_exists($analogs, 'GetPriceIdResult')) {
+                    if (is_array($analogs->GetPriceIdResult->PriceSearchModel)) {
+                        foreach ($analogs->GetPriceIdResult->PriceSearchModel as $product) {
+                            $this->createProduct($product, 'analog');
+                        }
+                    } else {
+                        $product = $analogs->GetPriceIdResult->PriceSearchModel;
+                        $this->createProduct($product, 'analog');
                     }
-                } else {
-                    $product = $products->GetPriceIdResult->PriceSearchModel;
-                    $this->createProduct($product);
                 }
 
             }
+        } else {
+            // поиск оригиналов
+            $original = $this->client->GetPriceId(['ArticleId' => $catalog_products->ArticleId, 'SearchCross' => 1]);
+            if (property_exists($original, 'GetPriceIdResult')) {
+                if (is_array($original->GetPriceIdResult->PriceSearchModel)) {
+                    foreach ($original->GetPriceIdResult->PriceSearchModel as $product) {
+                        $this->createProduct($product, 'original');
+                    }
+                } else {
+                    $product = $original->GetPriceIdResult->PriceSearchModel;
+                    $this->createProduct($product, 'original');
+                }
+            }
+            // поиск аналогов
+            $analogs = $this->client->GetPriceId(['ArticleId' => $catalog_products->ArticleId]);
+            if (property_exists($analogs, 'GetPriceIdResult')) {
+                if (is_array($analogs->GetPriceIdResult->PriceSearchModel)) {
+                    foreach ($analogs->GetPriceIdResult->PriceSearchModel as $product) {
+                        $this->createProduct($product, 'original');
+                    }
+                } else {
+                    $product = $analogs->GetPriceIdResult->PriceSearchModel;
+                    $this->createProduct($product, 'original');
+                }
+            }
+
         }
 
     }
 
 //    метод создает модель продукта и пушит его в response который отдаст парсинг в контроллер
-    private function createProduct($product) {
+    private function createProduct($product, $type) {
         $productModel = new Product();
         $days = $product->NumberOfDaysSupply + 1;
 
@@ -97,7 +126,7 @@ class AvtoPiterAPI implements IParser
             ->format('d-m-Y');
         $productModel->offers_quantity = $product->NumberOfAvailable;
 
-        $this->response[mb_strtoupper($product->CatalogName)][] = $productModel;
+        $this->products[$type][mb_strtoupper($product->CatalogName)][] = $productModel;
     }
 
 }
