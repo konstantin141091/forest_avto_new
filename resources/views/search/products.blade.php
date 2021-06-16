@@ -22,27 +22,32 @@
                 </li>
             </ul>
             @if($success)
-                <h2>Оригинальные запчасти по {{ $article }}</h2>
-                <div class="search-results">
-                    <div class="main-product">
-                        <div class="title-block">
-                            <h2 class="subtitle">Искомый товар</h2>
-                            <product-sort-component :type="'original'"></product-sort-component>
+                @if($products['original'])
+                    <h2>Оригинальные запчасти по {{ $article }}</h2>
+                    <div class="search-results">
+                        <div class="main-product">
+                            <div class="title-block">
+                                <h2 class="subtitle">Искомый товар</h2>
+                                <product-sort-component :type="'original'"></product-sort-component>
+                            </div>
+                            <products-list-component :products="{{ json_encode($products['original']) }}" :type="'original'" ref="productListOriginal"></products-list-component>
                         </div>
-                        <products-list-component :products="{{ json_encode($products['original']) }}" :type="'original'" ref="productListOriginal"></products-list-component>
                     </div>
-                </div>
+                @endif
 
-                <h2>Аналоги по {{ $article }}</h2>
-                <div class="search-results">
-                    <div class="main-product">
-                        <div class="title-block">
-                            <h2 class="subtitle">Искомый товар</h2>
-                            <product-sort-component :type="'analog'"></product-sort-component>
+                @if(!empty($products['analog']))
+                    <h2>Аналоги по {{ $article }}</h2>
+                    <div class="search-results">
+                        <div class="main-product">
+                            <div class="title-block">
+                                <h2 class="subtitle">Искомый товар</h2>
+                                <product-sort-component :type="'analog'"></product-sort-component>
+                            </div>
+                            <products-list-component :products="{{ json_encode($products['analog']) }}" :type="'analog'" ref="productListAnalog"></products-list-component>
                         </div>
-                        <products-list-component :products="{{ json_encode($products['analog']) }}" :type="'analog'" ref="productListAnalog"></products-list-component>
                     </div>
-                </div>
+                @endif
+
             @else
                 <p>Ничего не нашли</p>
             @endif

@@ -20,6 +20,7 @@ class OrderController extends Controller
 
     public function show(Order $order) {
         $products = Cart::all()->where('session_id', '=', $order->session_id);
+//        dd($products);
         return view('admin.order.show', [
             'order' => $order,
             'products' => $products

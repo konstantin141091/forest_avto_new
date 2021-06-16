@@ -3,9 +3,10 @@
 
 namespace App\Services;
 
-use App\Http\Interfaces\IParser;
+use App\Interfaces\IParser;
 use GuzzleHttp\Client;
 use App\Models\Product;
+use Illuminate\Support\Facades\Date;
 
 class BergAPI extends ParseService implements IParser
 {
@@ -16,7 +17,7 @@ class BergAPI extends ParseService implements IParser
     public function __construct()
     {
         $this->api_key = env('BERG_API_KEY');
-        $this->base_url = env('BERG_STOCK_REQUEST_URL');
+        $this->base_url = env('BERG_BASE_URL');
     }
 
     public function getProductsWhitArticle(string $article, array $products) {
@@ -31,7 +32,9 @@ class BergAPI extends ParseService implements IParser
             // если не удалось получить товары от api, то массив products не заполниться от этого сайта
         }
 
-        if (!empty($products['resources'])) {
+//        dd($result);
+
+        if (!empty($result['resources'])) {
             $this->parseProducts($result, 'original');
         }
 //        dd($this->products);
@@ -39,15 +42,16 @@ class BergAPI extends ParseService implements IParser
     }
 
     private function getUrlWhitArticle(string $article) {
-        $url = $this->base_url.'?items[0][resource_article]='.$article.'&key='.$this->api_key;
+        $url = $this->base_url . 'ordering/get_stock.json' . '?items[0][resource_article]='.$article.'&key='.$this->api_key;
         return $url;
     }
 
     private function parseProducts($products, string $type) {
+//        dd($products);
         foreach ($products['resources'] as $value) {
             try {
                 $response[$value['brand']['name']] = [];
-//            dd($response);
+//            перебираю скдады
                 foreach ($value['offers'] as $el) {
                     $days =  $el['assured_period'] + 1;
                     $product = new Product();
@@ -72,6 +76,48 @@ class BergAPI extends ParseService implements IParser
             } catch (\Exception $exception) {
                 // если модель продукта не создалась и не добавилась, то просто ничего не будет
             }
+        }
+    }
+
+    public function createOrder($product) {
+//        dd($product);
+        try {
+            $url = $this->base_url . 'ordering/place_order.json' . '?key=' . $this->api_key;
+            $date = new \DateTime($product['dispatch_at']);
+            $headers = [
+                'Content-Type' => 'application/json',
+
+            ];
+            $client = new Client();
+            $request = $client->post($url, [
+                \GuzzleHttp\RequestOptions::HEADERS => $headers,
+                \GuzzleHttp\RequestOptions::JSON => [
+                    "force" => 1,
+                    "order" => [
+                        "is_test" => 1,
+                        "dispatch_type" => $product['dispatch_type'],
+                        "dispatch_time" => 1,
+                        "dispatch_at" => $date->format('Y-m-d'),
+                        "person" => $product['person'],
+                        "phone" => $product['phone'],
+                        "comment" => $product['comment_order'],
+                        "shipment_address" => $product['shipment_address'],
+                        "items" => [
+                            0 => [
+                                "resource_id" => $product['resource_id'],
+                                "warehouse_id" => $product['warehouse_id'],
+                                "quantity" => $product['quantity'],
+                                "comment" => $product['comment_product']
+                            ]
+                        ]
+
+                    ]
+                ]
+            ]);
+            $answer = json_decode($request->getBody()->getContents(), true);
+            return $answer;
+        } catch (\Exception $exception) {
+            return false;
         }
     }
 }

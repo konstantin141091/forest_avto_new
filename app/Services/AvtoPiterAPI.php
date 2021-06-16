@@ -3,7 +3,7 @@
 
 namespace App\Services;
 
-use App\Http\Interfaces\IParser;
+use App\Interfaces\IParser;
 use App\Models\Product;
 
 class AvtoPiterAPI implements IParser
@@ -31,7 +31,7 @@ class AvtoPiterAPI implements IParser
                 'UserID' => $this->user_id,
                 'Password' => $this->password,
                 'Save' => 'true',
-                ],
+            ],
         ];
         $this->client = new \SoapClient($connect['wsdl']);
         $this->client->Authorization($connect['login']);
@@ -51,6 +51,7 @@ class AvtoPiterAPI implements IParser
             foreach ($catalog_products as $value) {
                 // поиск оригиналов
                 $original = $this->client->GetPriceId(['ArticleId' => $value->ArticleId]);
+//                dd($original);
                 if (property_exists($original, 'GetPriceIdResult')) {
                     if (is_array($original->GetPriceIdResult->PriceSearchModel)) {
                         foreach ($original->GetPriceIdResult->PriceSearchModel as $product) {
@@ -79,6 +80,7 @@ class AvtoPiterAPI implements IParser
         } else {
             // поиск оригиналов
             $original = $this->client->GetPriceId(['ArticleId' => $catalog_products->ArticleId, 'SearchCross' => 1]);
+            dd($original);
             if (property_exists($original, 'GetPriceIdResult')) {
                 if (is_array($original->GetPriceIdResult->PriceSearchModel)) {
                     foreach ($original->GetPriceIdResult->PriceSearchModel as $product) {

@@ -23,8 +23,12 @@
                 <p>Бренд товара: {{ $product->brand_name }}</p>
                 <p>Название магазина: {{ $product->shop_name }}</p>
                 <p>Количество: {{ $product->quantity }}</p>
+                <p>Количество на складе: {{ $product->offers_quantity }}</p>
+                <p>Дней доставки у поставщика: {{ $product->offers_average_period }}</p>
+                <p>Дата доставки у поставщика: {{ $product->offers_assured_period }}</p>
                 <p>Цена за товар: {{ $product->offers_price }}</p>
                 <p>Итого по этому товару: {{ $product->total }}</p>
+                <a href="{{ route('admin.order.show.create', $product) }}">Оформить через api</a>
             </div>
             <hr>
         @empty

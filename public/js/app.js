@@ -2752,12 +2752,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      paginate: 4
+      paginate: 10
     };
   },
   methods: {
     incrementPaginate: function incrementPaginate() {
-      this.paginate = this.paginate + 4;
+      this.paginate = this.paginate + 10;
     }
   },
   computed: {
@@ -41903,7 +41903,7 @@ var render = function() {
           },
           [
             _c("p", { on: { click: _vm.incrementPaginate } }, [
-              _vm._v("Показать еще 4 предложения")
+              _vm._v("Показать еще 10 предложения")
             ])
           ]
         )

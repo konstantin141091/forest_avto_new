@@ -3,7 +3,7 @@
 
 namespace App\Services;
 
-use App\Http\Interfaces\IParser;
+use App\Interfaces\IParser;
 use App\Models\Product;
 
 class RosskoAPI extends ParseService implements IParser

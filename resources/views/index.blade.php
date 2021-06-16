@@ -21,7 +21,7 @@
 
         <form action="{{ route('search.car') }}" method="post" class="mt-3">
             @csrf
-            <input type="text" placeholder="Введите VIN/FRAME" value="{{ old('search') }}">
+            <input type="text" placeholder="Введите VIN/FRAME" name="search" value="{{ old('search') }}">
             <button type="submit">Подобрать запчасти</button>
         </form>
         @if($errors->has('search'))

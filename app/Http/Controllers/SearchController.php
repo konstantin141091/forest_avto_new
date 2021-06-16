@@ -18,18 +18,17 @@ class SearchController extends Controller
         $pars_service = new ParseService();
 
         // avtopiter products
-        $products = $pars_service->avtoPiterApi->getProductsWhitArticle($article, $products);
+//        $products = $pars_service->avtoPiterApi->getProductsWhitArticle($article, $products);
 
         // berg products
         $products = $pars_service->bergApi->getProductsWhitArticle($article, $products);
 
         // rossko products
-        $products = $pars_service->rosskoApi->getProductsWhitArticle($article, $products);
+//        $products = $pars_service->rosskoApi->getProductsWhitArticle($article, $products);
 
         if(!empty($products)) {
             $success = true;
         }
-
 //        dd($products);
 
         return view('search.products', [

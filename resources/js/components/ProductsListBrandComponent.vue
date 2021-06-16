@@ -22,7 +22,7 @@
             </div>
             <ProductComponent v-for="(product, index) in brand" :product="product" :index="index" v-if="index < paginate"></ProductComponent>
             <div class="vue-paginate" v-show="paginateClick">
-                <p @click="incrementPaginate">Показать еще 4 предложения</p>
+                <p @click="incrementPaginate">Показать еще 10 предложения</p>
             </div>
         </div>
     </div>
@@ -42,12 +42,12 @@
     },
     data() {
       return {
-        paginate: 4,
+        paginate: 10,
       }
     },
     methods: {
       incrementPaginate() {
-        this.paginate = this.paginate + 4;
+        this.paginate = this.paginate + 10;
       }
     },
     computed: {
