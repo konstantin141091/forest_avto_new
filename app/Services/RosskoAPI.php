@@ -100,7 +100,7 @@ class RosskoAPI extends ParseService implements IParser
                     $productModel->article = $this->article;
                 }
                 $productModel->name = $product->name;
-                $productModel->shop_name = 'росско';
+                $productModel->shop_name = 'rossko';
                 $productModel->partnumber = $product->partnumber;
                 $productModel->brand_name = mb_strtoupper($product->brand);
 
@@ -112,7 +112,14 @@ class RosskoAPI extends ParseService implements IParser
                     ->add(new \DateInterval("P{$days}D"))
                     ->format('d-m-Y');
                 $productModel->offers_quantity = $el->count;
-                $this->products[$type][mb_strtoupper($product->brand)][] = $productModel;
+                if ($type === 'analog') {
+                    if ($this->checkAnalog($productModel, mb_strtoupper($product->brand))) {
+                        $this->products[$type][mb_strtoupper($product->brand)][] = $productModel;
+                    }
+                }else {
+                    $this->products[$type][mb_strtoupper($product->brand)][] = $productModel;
+                }
+
             }
         } else {
             $productModel = new Product();
@@ -125,7 +132,7 @@ class RosskoAPI extends ParseService implements IParser
                 $productModel->article = $this->article;
             }
             $productModel->name = $product->name;
-            $productModel->shop_name = 'росско';
+            $productModel->shop_name = 'rossko';
             $productModel->partnumber = $product->partnumber;
             $productModel->brand_name = mb_strtoupper($product->brand);
 
@@ -137,7 +144,94 @@ class RosskoAPI extends ParseService implements IParser
                 ->add(new \DateInterval("P{$days}D"))
                 ->format('d-m-Y');
             $productModel->offers_quantity = $product->stocks->stock->count;
-            $this->products[$type][mb_strtoupper($product->brand)][] = $productModel;
+            if ($type === 'analog') {
+                if ($this->checkAnalog($productModel, mb_strtoupper($product->brand))) {
+                    $this->products[$type][mb_strtoupper($product->brand)][] = $productModel;
+                }
+            } else {
+                $this->products[$type][mb_strtoupper($product->brand)][] = $productModel;
+            }
+
+        }
+    }
+
+    private function checkAnalog($product, $brand) {
+//        dd(isset($this->products['analog'][$brand]));
+        if (isset($this->products['analog'][$brand])) {
+            foreach ($this->products['analog'][$brand] as $value) {
+                if ($value->offers_id === $product->offers_id &&
+                    $value->product_id === $product->product_id &&
+                    $value->offers_price === $product->offers_price
+                ) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return true;
+        }
+
+    }
+
+    public function createOrder($product) {
+//        $connect = [
+//            'wsdl'    => $this->base_url . 'GetCheckoutDetails',
+//            'options' => [
+//                'connection_timeout' => 1,
+//                'trace' => true
+//            ]
+//        ];
+//        $this->param = [
+//            'KEY1' => $this->api_key_1,
+//            'KEY2' => $this->api_key_2,
+//        ];
+//        $query = new \SoapClient($connect['wsdl'], $connect['options']);
+//        $result = $query->GetCheckoutDetails($this->param);
+//        dd($result);
+
+
+        try {
+            $connect = [
+                'wsdl'    => $this->base_url . 'GetCheckout',
+                'options' => [
+                    'connection_timeout' => 1,
+                    'trace' => true
+                ]
+            ];
+            $query = new \SoapClient($connect['wsdl'], $connect['options']);
+            $result = $query->GetCheckout([
+                'KEY1' => $this->api_key_1,
+                'KEY2' => $this->api_key_2,
+                'delivery' => [
+                    'delivery_id' => '000000002',
+                    'address_id' => '50344'
+                ],
+                'payment' => [
+                    'payment_id' => $product['payment_id'],
+                    'requisite_id' => '',
+                ],
+                'contact' => [
+                    'name' => $product['name'],
+                    'phone' => $product['phone'],
+                    'comment' => $product['comment']
+                ],
+                'delivery_parts' => false,
+                'PARTS' => [
+                    'Part' => [
+                        'partnumber' => $product['partnumber'],
+                        'brand' => $product['brand'],
+                        'stock' => $product['stock'],
+                        'count' => $product['count'],
+                        'comment' => $product['comment_product']
+                    ]
+                ]
+            ]);
+            if ($result->SearchResult->success) {
+                return true;
+            } else return false;
+
+        } catch (\Exception $exception) {
+            return false;
         }
     }
 }

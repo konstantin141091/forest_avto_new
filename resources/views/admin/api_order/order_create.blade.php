@@ -16,7 +16,12 @@
 {{--        @forelse($products as $product)--}}
             <div>
                 <p>Артикул товара: {{ $product->article }}</p>
-                <p>ID в магазине: {{ $product->product_id }}</p>
+                <p>
+                    ID в магазине: {{ $product->product_id }}
+                    @if($product->shop_name === 'rossko')
+                          (на сайте Росско этот товар можно найти по этому id)
+                    @endif
+                </p>
                 <p>ID склада в магазине: {{ $product->offers_id }}</p>
                 <p>Название склада в магазине: {{ $product->offers_name }}</p>
                 <p>Название товара: {{ $product->name }}</p>
@@ -28,8 +33,9 @@
                 <p>Дата доставки у поставщика: {{ $product->offers_assured_period }}</p>
                 <p>Цена за товар: {{ $product->offers_price }}</p>
                 <p>Итого по этому товару: {{ $product->total }}</p>
-{{--                <a href="{{ route('admin.order.show.create', $product) }}">Оформить через api</a>--}}
-                <form action="{{ route('admin.order.create') }}" method="POST">
+
+                @if($product->shop_name === 'berg')
+                    <form action="{{ route('admin.order.create') }}" method="POST">
                     <h2>Форма оформления заказа через api</h2>
                     <p>Этот заказ после оформления появится в личном кабинете Berg</p>
                     @csrf
@@ -100,6 +106,78 @@
 
                     <button type="submit">Оформить заказать</button>
                 </form>
+                @endif
+
+                @if($product->shop_name === 'avto_piter')
+                    <form action="{{ route('admin.order.create') }}" method="POST">
+                        <h2>Форма оформления товара в корзину через api</h2>
+                        <p>Этот товар после оформления появится в корзине АвтоПитер</p>
+                        @csrf
+                        <input type="hidden" name="DetailUid" value="{{ $product->product_id }}">
+                        <input type="hidden" name="SalePrice" value="{{ $product->offers_price }}">
+                        <input type="hidden" name="shop_name" value="{{ $product->shop_name }}">
+
+                        <div>
+                            <label for="Сomment">Комментарий</label>
+                            <input type="text" name="Сomment" id="Сomment" value="{{ old('comment') }}">
+                        </div>
+
+                        <div>
+                            <label for="Quantity">Заказаное количество</label>
+                            <input type="number" name="Quantity" id="Quantity" value="{{ $product->quantity }}">
+                        </div>
+
+                        <button type="submit">Добавить в корзину</button>
+                    </form>
+                @endif
+
+                @if($product->shop_name === 'rossko')
+                    <form action="{{ route('admin.order.create') }}" method="POST">
+                        <h2>Форма оформления заказа через api</h2>
+                        <p>Этот заказ после оформления появится в личном кабинете Росско</p>
+                        @csrf
+                        <input type="hidden" name="partnumber" value="{{ $product->article }}">
+                        <input type="hidden" name="brand" value="{{ $product->brand_name }}">
+                        <input type="hidden" name="stock" value="{{ $product->offers_id }}">
+                        <input type="hidden" name="shop_name" value="{{ $product->shop_name }}">
+
+                        <div>
+                            <label for="payment_id">Способ оплаты</label>
+                            <select name="payment_id" id="payment_id">
+                                <option disabled>Выберите тип оплаты</option>
+                                <option value="1">Оплата банковским платежом</option>
+                                <option selected value="2">Оплата наличными при получении товара</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="comment">Комментарий к заказу</label>
+                            <input type="text" name="comment" id="comment" value="{{ old('comment') }}">
+                        </div>
+
+                        <div>
+                            <label for="name">Имя</label>
+                            <input type="text" name="name" id="name" value="{{ old('name') }}">
+                        </div>
+
+                        <div>
+                            <label for="phone">Телефон</label>
+                            <input type="text" name="phone" id="phone" value="{{ old('phone') }}">
+                        </div>
+
+                        <div>
+                            <label for="count">Заказаное количество</label>
+                            <input type="number" name="count" id="count" value="{{ $product->quantity }}">
+                        </div>
+
+                        <div>
+                            <label for="comment">Комментарий к детали</label>
+                            <input type="text" name="comment_product" id="comment_product" value="{{ old('comment_product') }}">
+                        </div>
+
+                        <button type="submit">Оформить заказ</button>
+                    </form>
+                @endif
 
             </div>
             <hr>

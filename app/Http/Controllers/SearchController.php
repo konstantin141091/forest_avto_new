@@ -21,10 +21,10 @@ class SearchController extends Controller
 //        $products = $pars_service->avtoPiterApi->getProductsWhitArticle($article, $products);
 
         // berg products
-        $products = $pars_service->bergApi->getProductsWhitArticle($article, $products);
+//        $products = $pars_service->bergApi->getProductsWhitArticle($article, $products);
 
         // rossko products
-//        $products = $pars_service->rosskoApi->getProductsWhitArticle($article, $products);
+        $products = $pars_service->rosskoApi->getProductsWhitArticle($article, $products);
 
         if(!empty($products)) {
             $success = true;

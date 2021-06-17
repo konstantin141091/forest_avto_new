@@ -80,7 +80,6 @@ class AvtoPiterAPI implements IParser
         } else {
             // поиск оригиналов
             $original = $this->client->GetPriceId(['ArticleId' => $catalog_products->ArticleId, 'SearchCross' => 1]);
-            dd($original);
             if (property_exists($original, 'GetPriceIdResult')) {
                 if (is_array($original->GetPriceIdResult->PriceSearchModel)) {
                     foreach ($original->GetPriceIdResult->PriceSearchModel as $product) {
@@ -116,7 +115,7 @@ class AvtoPiterAPI implements IParser
         $productModel->product_id = $product->DetailUid;
         $productModel->article = $this->article;
         $productModel->name = $product->Name;
-        $productModel->shop_name = 'авто питер';
+        $productModel->shop_name = 'avto_piter';
         $productModel->brand_name = mb_strtoupper($product->CatalogName);
 
         $productModel->offers_id = $product->SellerId;
@@ -129,6 +128,43 @@ class AvtoPiterAPI implements IParser
         $productModel->offers_quantity = $product->NumberOfAvailable;
 
         $this->products[$type][mb_strtoupper($product->CatalogName)][] = $productModel;
+    }
+
+    public function createOrder ($product) {
+        $connect = [
+            'wsdl' => 'http://service.autopiter.ru/v2/price?WSDL',
+            'login' => [
+                'UserID' => $this->user_id,
+                'Password' => $this->password,
+                'Save' => 'true',
+            ],
+        ];
+
+        try{
+            $this->client = new \SoapClient($connect['wsdl']);
+            $this->client->Authorization($connect['login']);
+            $result = $this->client->MakeOrderByItems([
+                'Items' => [
+                    0 => [
+                        'DetailUid' => $product['DetailUid'],
+                        'Comment' => $product['Сomment'],
+                        'SalePrice' => $product['SalePrice'],
+                        'Quantity' => $product['Quantity'],
+                    ]
+                ]
+            ]);
+            if ($result->MakeOrderByItemsResult->ResponseCodeItemCart->Code->ResponseCode === "4") {
+                $product['SalePrice'] = $result->MakeOrderByItemsResult->ResponseCodeItemCart->Item->SalePrice;
+                $this->createOrder($product);
+            }
+            if ($result->MakeOrderByItemsResult->ResponseCodeItemCart->Code->ResponseCode === "0") {
+                return true;
+            }
+            return false;
+        } catch (\Exception $exception) {
+            return false;
+        }
+
     }
 
 }

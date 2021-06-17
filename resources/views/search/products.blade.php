@@ -22,7 +22,7 @@
                 </li>
             </ul>
             @if($success)
-                @if($products['original'])
+                @if(!empty($products['original']))
                     <h2>Оригинальные запчасти по {{ $article }}</h2>
                     <div class="search-results">
                         <div class="main-product">
