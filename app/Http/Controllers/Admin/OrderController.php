@@ -9,8 +9,12 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function index() {
-        $orders = Order::all()->sortByDesc('created_at');
+    public function index(Request $request) {
+        if ($request->sort) {
+            $orders = $this->indexSort($request->sort);
+        } else {
+            $orders = Order::orderByDesc('created_at')->paginate(20);
+        }
 
         return view('admin.order.index',
             [
@@ -25,5 +29,40 @@ class OrderController extends Controller
             'order' => $order,
             'products' => $products
         ]);
+    }
+
+    public function edit(Order $order, Request $request) {
+        $order->fill($request->all());
+        $order->update();
+        return back();
+    }
+
+    private function indexSort($value) {
+        $orders = null;
+        switch ($value) {
+            case 'date_up' :
+                $orders = Order::orderByDesc('created_at')->paginate(20);
+                break;
+            case  'date_down' :
+                $orders = Order::orderBy('created_at')->paginate(20);
+                break;
+            case  'total_up' :
+                $orders = Order::orderByDesc('total_price')->paginate(20);
+                break;
+            case  'total_down' :
+                $orders = Order::orderBy('total_price')->paginate(20);
+                break;
+            case  'status_new' :
+                $orders = Order::query()->where('status', '=', 'оформлен')->orderByDesc('created_at')->paginate(20);
+                break;
+            case  'status_work' :
+                $orders = Order::query()->where('status', '=', 'в работе')->orderByDesc('created_at')->paginate(20);
+                break;
+            case  'status_finish' :
+                $orders = Order::query()->where('status', '=', 'выполнен')->orderByDesc('created_at')->paginate(20);
+                break;
+        }
+//        dd($orders);
+        return $orders;
     }
 }

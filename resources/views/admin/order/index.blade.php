@@ -33,6 +33,22 @@
                 <div class="admin__content">
                     <h1>Просмотр заказов</h1>
                     <div class="admin__orders">
+                        <div class="admin__sort">
+                            <form action="{{ route('admin.order.index') }}" method="GET">
+{{--                                @csrf--}}
+                                <label for="sort">Сортировать по</label>
+                                <select name="sort" id="sort">
+                                    <option value="date_up">По дате(сначала новые)</option>
+                                    <option value="date_down">По дате(сначала старые)</option>
+                                    <option value="total_up">По сумме(сначала дорогие)</option>
+                                    <option value="total_down">По сумме(сначала дешевые)</option>
+                                    <option value="status_new">По статусу(оформлен)</option>
+                                    <option value="status_work">По статусу(в работе)</option>
+                                    <option value="status_finish">По статусу(выполнен)</option>
+                                </select>
+                                <button type="submit">Применить</button>
+                            </form>
+                        </div>
                         <div class="result-table">
                             <div class="stocks-info-td">
                                 <div class="tr">
@@ -61,7 +77,36 @@
                                         {{ $order->id }}
                                     </div>
                                     <div class="td admin__td admin__td-status">
-                                        {{ $order->status }}
+                                        <form action="{{ route('admin.order.edit', $order) }}" method="POST" class="admin__status-form">
+                                            @csrf
+                                            <label for="status"></label>
+                                            <select name="status" id="status">
+                                                <option value="оформлен"
+                                                @if($order->status === 'оформлен')
+                                                    selected
+                                                @endif
+                                                >
+                                                    оформлен
+                                                </option>
+
+                                                <option value="в работе"
+                                                        @if($order->status === 'в работе')
+                                                        selected
+                                                        @endif
+                                                >
+                                                    в работе
+                                                </option>
+                                                <option value="выполнен"
+                                                        @if($order->status === 'выполнен')
+                                                        selected
+                                                        @endif
+                                                >
+                                                    выполнен
+                                                </option>
+                                            </select>
+                                            <button type="submit">сохранить</button>
+                                        </form>
+{{--                                        {{ $order->status }}--}}
                                     </div>
                                     <div class="td admin__td admin__td-name">
                                         {{ $order->name }}
@@ -83,6 +128,9 @@
                                 @endforelse
                             </div>
 
+                        </div>
+                        <div>
+                            {{ $orders->links() }}
                         </div>
                     </div>
                 </div>

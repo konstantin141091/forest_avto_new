@@ -33,6 +33,7 @@ class Cart extends Model
 //        данные по корзине
         'quantity',
         'total',
-        'session_id'
+        'session_id',
+        'status'
     ];
 }

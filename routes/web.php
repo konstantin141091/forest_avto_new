@@ -62,8 +62,12 @@ Route::group([
     ], function() {
         Route::get('/', 'OrderController@index')->name('index');
         Route::get('/{order}', 'OrderController@show')->name('show');
+        Route::post('/{order}', 'OrderController@edit')->name('edit');
+
+        Route::post('/product/status/{cart}', 'CartController@edit')->name('product.status.edit');
+
         Route::get('/product/create/{cart}', 'ApiOrderController@showCreateOrder')->name('show.create');
-        Route::post('/product/create', 'ApiOrderController@createOrder')->name('create');
+        Route::post('/product/create/{cart}', 'ApiOrderController@createOrder')->name('create');
     });
 });
 

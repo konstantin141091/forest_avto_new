@@ -33,6 +33,31 @@
                 <p>Дата доставки у поставщика: {{ $product->offers_assured_period }}</p>
                 <p>Цена за товар: {{ $product->offers_price }}</p>
                 <p>Итого по этому товару: {{ $product->total }}</p>
+                <form action="{{ route('admin.order.product.status.edit', $product) }}" method="POST">
+                    @csrf
+                    <label for="status">Статус заказа детали</label>
+                    <select name="status" id="status">
+                        <option value="не заказан"
+                                @if($product->status === 'не заказан')
+                                selected
+                                @endif>
+                            не заказан
+                        </option>
+                        <option value="заказан через апи"
+                                @if($product->status === 'заказан через апи')
+                                selected
+                                @endif>
+                            заказан через апи
+                        </option>
+                        <option value="сам заказал"
+                                @if($product->status === 'сам заказал')
+                                selected
+                                @endif>
+                            сам заказал
+                        </option>
+                    </select>
+                    <button type="submit">Сохранить статус</button>
+                </form>
                 <a href="{{ route('admin.order.show.create', $product) }}">Оформить через api</a>
             </div>
             <hr>

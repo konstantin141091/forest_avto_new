@@ -11,13 +11,15 @@ use Illuminate\Http\Request;
 
 class ApiOrderController extends Controller
 {
-    public function createOrder(Request $request) {
+    public function createOrder(Cart $cart, Request $request) {
 //        dd($request->all());
         if ($request->shop_name === 'berg') {
             $begrApi = new BergAPI();
             $result = $begrApi->createOrder($request->all());
 //            dd($result);
             if ($result) {
+                $cart->status = 'заказан через апи';
+                $cart->update();
                 dd('Заказ оформлен. Можно посмотреть его в учетке Берга.');
             } else {
                 dd('Что-то пошло не так, заказ не оформился. Возможно вы не заполнили все поля.');
@@ -28,6 +30,8 @@ class ApiOrderController extends Controller
             $avtoPiterApi = new AvtoPiterAPI();
             $result = $avtoPiterApi->createOrder($request->all());
             if ($result) {
+                $cart->status = 'заказан через апи';
+                $cart->update();
                 dd('Товар добавлен в корзину. Можно посмотреть его в учетке Автопитера и там оформить заказ.');
             } else {
                 dd('Что-то пошло не так, заказ не оформился. Возможно товара больше нет или нет подключения к апи автопитера.');
@@ -38,6 +42,8 @@ class ApiOrderController extends Controller
             $rosskoApi = new RosskoAPI();
             $result = $rosskoApi->createOrder($request->all());
             if ($result) {
+                $cart->status = 'заказан через апи';
+                $cart->update();
                 dd('Заказ оформлен. Можно посмотреть его в учетке Росско.');
             } else {
                 dd('Что-то пошло не так, заказ не оформился. Возможно товара больше нет или нет подключения к апи росско.');

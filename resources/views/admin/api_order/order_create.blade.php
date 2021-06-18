@@ -35,7 +35,7 @@
                 <p>Итого по этому товару: {{ $product->total }}</p>
 
                 @if($product->shop_name === 'berg')
-                    <form action="{{ route('admin.order.create') }}" method="POST">
+                    <form action="{{ route('admin.order.create', $product) }}" method="POST">
                     <h2>Форма оформления заказа через api</h2>
                     <p>Этот заказ после оформления появится в личном кабинете Berg</p>
                     @csrf
@@ -109,7 +109,7 @@
                 @endif
 
                 @if($product->shop_name === 'avto_piter')
-                    <form action="{{ route('admin.order.create') }}" method="POST">
+                    <form action="{{ route('admin.order.create', $product) }}" method="POST">
                         <h2>Форма оформления товара в корзину через api</h2>
                         <p>Этот товар после оформления появится в корзине АвтоПитер</p>
                         @csrf
@@ -132,7 +132,7 @@
                 @endif
 
                 @if($product->shop_name === 'rossko')
-                    <form action="{{ route('admin.order.create') }}" method="POST">
+                    <form action="{{ route('admin.order.create', $product) }}" method="POST">
                         <h2>Форма оформления заказа через api</h2>
                         <p>Этот заказ после оформления появится в личном кабинете Росско</p>
                         @csrf

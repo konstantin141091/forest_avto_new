@@ -92,6 +92,7 @@
   &__td {
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 3% 1px!important;
     text-align: center;
     &-id {
@@ -111,6 +112,16 @@
     }
     &-more {
       width: 14%;
+    }
+  }
+
+  &__status-form {
+    flex-direction: column;
+    & select {
+      margin-bottom: 9px;
+    }
+    & button {
+      margin: 0!important;
     }
   }
 }
