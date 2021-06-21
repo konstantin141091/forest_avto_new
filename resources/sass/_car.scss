@@ -6,6 +6,10 @@
   display: none!important;
 }
 
+.tr__category:first-child {
+  border-bottom: solid 1px #E5E5E5;
+}
+
 .caption {
   &__year, &__engine, &__engine-code, &__region, &__kp, &__more {
     padding: 1rem 0!important;
@@ -27,9 +31,6 @@
     width: 35%!important;
     text-align: center;
   }
-  //&__engine-code {
-  //  width: 10%!important;
-  //}
 }
 
 .caption-car {
@@ -38,7 +39,7 @@
 
 .td {
   &__year, &__engine, &__engine-code, &__region, &__kp, &__more {
-    padding: 1% 0!important;
+    padding: 7% 0!important;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,6 +63,17 @@
   &__more {
     & form {
       justify-content: center!important;
+    }
+  }
+  &__category {
+    width: 70%!important;
+    display: flex;
+    align-items: center;
+  }
+  &__category-more {
+    & form {
+      display: flex;
+      justify-content: center;
     }
   }
 }
@@ -103,4 +115,64 @@
     justify-content: center;
   }
 
+  .td__category {
+    padding: 1% 5px!important;
+  }
+  .td__category-more {
+    padding: 1% 0!important;
+  }
+  .button-category {
+    margin-left: 0!important;
+  }
+
+}
+
+.car-catalog {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__item-title {
+    position: relative;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #ffffff;
+    box-shadow: 0 9px 46px rgba(0,0,0,.12)!important;
+    opacity: 1!important;
+    height: 65px;
+
+  }
+  &__item {
+    border: solid 1px #E5E5E5;
+    max-width: 33.33333333%;
+    //padding: 0 16px;
+    height: 336px;
+    margin: 0 1% 20px 1%;
+    width: 30%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .__item>* {
+    flex: 0 0 33.3333%;
+  }
+  &__item-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 15px;
+  }
+  &__item-img img {
+    width: auto!important;
+    max-width: 100%!important;
+    height: auto!important;
+    max-height: 100%!important;
+    transition: 0.5s;
+  }
+  &__item-img img:hover {
+    transform: scale(1.1);
+  }
 }

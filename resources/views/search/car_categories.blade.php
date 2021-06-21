@@ -22,18 +22,27 @@
                 </li>
             </ul>
             @if($success)
-                <div>
-                    @foreach($categories as $catalog)
-                        <p>{{ $catalog['name'] }}</p>
-                        <form action="{{ route('search.car.catalog') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="groupId" value="{{ $catalog['id'] }}">
-                            <input type="hidden" name="catalogId" value="{{ $data['catalogId'] }}">
-                            <input type="hidden" name="carId" value="{{ $data['carId'] }}">
-                            <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">
-                            <button type="submit">Подробнее</button>
-                        </form>
-                    @endforeach
+                <div class="result-table">
+                    <div class="stocks-info-td">
+                        @foreach($categories as $catalog)
+                            <div class="tr tr__category">
+                                <div class="td td__category">{{ $catalog['name'] }}</div>
+                                <div class="td td__category-more">
+                                    <form action="{{ route('search.car.catalog') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="groupId" value="{{ $catalog['id'] }}">
+                                        <input type="hidden" name="catalogId" value="{{ $data['catalogId'] }}">
+                                        <input type="hidden" name="carId" value="{{ $data['carId'] }}">
+                                        <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">
+                                        <button type="submit" class="button-category">Подробнее</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        @endforeach
+
+                    </div>
+
                 </div>
             @else
                 <p>Ничего не нашли</p>

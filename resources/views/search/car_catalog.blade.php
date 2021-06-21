@@ -22,39 +22,67 @@
                 </li>
             </ul>
             @if($success)
-                <div>
-                    @foreach($catalog as $value)
-                        <div>
-                            <p>{{ $value['name'] }}</p>
-                            <img src="{{ $value['img'] }}" alt="parts">
-                            @if($value['hasParts'])
-                                <form action="{{ route('search.car.catalog.parts') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="catalogId" value="{{ $data['catalogId'] }}">
-                                    <input type="hidden" name="carId" value="{{ $data['carId'] }}">
-                                    <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">
-                                    <input type="hidden" name="groupId" value="{{ $value['id'] }}">
-                                    {{--                                <input type="hidden" name="img " value="{{ $value['img'] }}">--}}
-                                    <button type="submit">Подробнее</button>
-                                </form>
-                            @else
-                                <form action="{{ route('search.car.catalog') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="catalogId" value="{{ $data['catalogId'] }}">
-                                    <input type="hidden" name="carId" value="{{ $data['carId'] }}">
-                                    <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">
-                                    <input type="hidden" name="groupId" value="{{ $value['id'] }}">
-                                    {{--                                <input type="hidden" name="img " value="{{ $value['img'] }}">--}}
-                                    <button type="submit">Подробнее</button>
-                                </form>
-                            @endif
-                            <hr>
-                        </div>
+                <div class="car-catalog">
+                    @foreach($catalog as $index => $value)
+                        @if($value['hasParts'])
+                        <form class="car-catalog__item" method="POST" action="{{ route('search.car.catalog.parts') }}" onclick="submit()">
+                            @csrf
+                            <input type="hidden" name="catalogId" value="{{ $data['catalogId'] }}">
+                            <input type="hidden" name="carId" value="{{ $data['carId'] }}">
+                            <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">
+                            <input type="hidden" name="groupId" value="{{ $value['id'] }}">
+                            <input type="hidden" name="img " value="{{ $value['img'] }}">
+                            <div class="car-catalog__item-title">
+                                {{ $value['name'] }}
+                            </div>
+                            <div class="car-catalog__item-img">
+                                <img src="{{ $value['img'] }}" alt="catalog">
+                            </div>
+                        </form>
+                        @else
+                            <form class="car-catalog__item" method="POST" action="{{ route('search.car.catalog') }}" onclick="submit()">
+                                @csrf
+                                <input type="hidden" name="catalogId" value="{{ $data['catalogId'] }}">
+                                <input type="hidden" name="carId" value="{{ $data['carId'] }}">
+                                <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">
+                                <input type="hidden" name="groupId" value="{{ $value['id'] }}">
+                                <input type="hidden" name="img " value="{{ $value['img'] }}">
+
+                                <div class="car-catalog__item-title">
+                                    {{ $value['name'] }}
+                                </div>
+                                <div class="car-catalog__item-img">
+                                    <img src="{{ $value['img'] }}" alt="catalog">
+                                </div>
+                            </form>
+                        @endif
+{{--                        @if($value['hasParts'])--}}
+{{--                            <form action="{{ route('search.car.catalog.parts') }}" method="POST" id="catalog-{{ $index }}">--}}
+{{--                                @csrf--}}
+{{--                                <input type="hidden" name="catalogId" value="{{ $data['catalogId'] }}">--}}
+{{--                                <input type="hidden" name="carId" value="{{ $data['carId'] }}">--}}
+{{--                                <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">--}}
+{{--                                <input type="hidden" name="groupId" value="{{ $value['id'] }}">--}}
+{{--                                <input type="hidden" name="img " value="{{ $value['img'] }}">--}}
+{{--                                <button type="submit" hidden >Подробнее</button>--}}
+{{--                            </form>--}}
+{{--                        @else--}}
+{{--                            <form action="{{ route('search.car.catalog') }}" method="POST" id="catalog-{{ $index }}">--}}
+{{--                                @csrf--}}
+{{--                                <input type="hidden" name="catalogId" value="{{ $data['catalogId'] }}">--}}
+{{--                                <input type="hidden" name="carId" value="{{ $data['carId'] }}">--}}
+{{--                                <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">--}}
+{{--                                <input type="hidden" name="groupId" value="{{ $value['id'] }}">--}}
+{{--                                <input type="hidden" name="img " value="{{ $value['img'] }}">--}}
+{{--                                <button type="submit" hidden  >Подробнее</button>--}}
+{{--                            </form>--}}
+{{--                        @endif--}}
                     @endforeach
                 </div>
             @else
                 <p>Ничего не нашли</p>
             @endif
         </div>
+{{--        <script src="{{ asset('js/scripts/catalog_select.js') }}"></script>--}}
     </main>
 @endsection

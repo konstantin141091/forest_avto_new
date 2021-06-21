@@ -78,6 +78,7 @@ class SearchController extends Controller
     }
 
     public function carCatalog(Request $request) {
+//        dd($request->all());
         $success = false;
         $data = [
             'catalogId' => $request->catalogId,
@@ -99,6 +100,7 @@ class SearchController extends Controller
     }
 
     public function carCatalogParts(Request $request) {
+//        dd($request->all());
         $success = false;
         $data = [
             'catalogId' => $request->catalogId,

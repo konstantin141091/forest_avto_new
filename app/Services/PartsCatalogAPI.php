@@ -37,7 +37,7 @@ class PartsCatalogAPI
 
         $result = json_decode($strin, true);
         $result2 = [$result];
-//        dd($result2);
+//        dd($result);
         return $result2;
 
 
@@ -61,6 +61,19 @@ class PartsCatalogAPI
     }
 
     public function carCategories($data) {
+        $cat = file(__DIR__ . '/category.json');
+        $strin = implode('', $cat);
+        $result = json_decode($strin, true);
+        $result2 = [$result];
+//        dd($result);
+        return $result;
+
+//        $catalog = file(__DIR__ . 'subcategory.json');
+//        $strin = implode('', $catalog);
+//        $result = json_decode($strin, true);
+
+
+
         try {
             $url = $this->base_url . 'catalogs/' . $data['catalogId'] . '/groups2/?carId=' . $data['carId']
                 . '&criteria=' . $data['criteria'];
@@ -68,8 +81,7 @@ class PartsCatalogAPI
                 \GuzzleHttp\RequestOptions::HEADERS => $this->getHeaders()
             ]);
             $categories = json_decode($request->getBody()->getContents(), true);
-            dd($categories);
-
+//            dd($categories);
             return $categories;
         } catch (\Exception $exception) {
             return false;
@@ -77,6 +89,14 @@ class PartsCatalogAPI
     }
 
     public function carCatalog($data) {
+        $cat = file(__DIR__ . '/subcategory.json');
+        $strin = implode('', $cat);
+        $result = json_decode($strin, true);
+        $result2 = [$result];
+//        dd($result);
+        return $result;
+
+
 //        $url = $this->base_url . 'catalogs/' . $data['catalogId'] . '/groups2/?carId=' . $data['carId']
 //            . '&groupId=' . $data['groupId'] . '&criteria=' . $data['criteria'];
 //        $request = $this->client->get($url, [
