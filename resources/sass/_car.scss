@@ -1,0 +1,106 @@
+.product-info-td__title-car {
+  line-height: 33px;
+}
+
+.tr-details-mobile {
+  display: none!important;
+}
+
+.caption {
+  &__year, &__engine, &__engine-code, &__region, &__kp, &__more {
+    padding: 1rem 0!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__year {
+    width: 7%!important;
+  }
+  &__engine {
+    width: 20%!important;
+    text-align: center;
+  }
+  &__region {
+    width: 11%!important;
+  }
+  &__kp {
+    width: 35%!important;
+    text-align: center;
+  }
+  //&__engine-code {
+  //  width: 10%!important;
+  //}
+}
+
+.caption-car {
+  padding: 1rem 20px!important;
+}
+
+.td {
+  &__year, &__engine, &__engine-code, &__region, &__kp, &__more {
+    padding: 1% 0!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  &__year {
+    width: 7%!important;
+  }
+
+  &__engine {
+    width: 20%!important;
+    text-align: center;
+  }
+  &__region {
+    width: 11%!important;
+  }
+  &__kp {
+    width: 35%!important;
+    text-align: center;
+  }
+  &__more {
+    & form {
+      justify-content: center!important;
+    }
+  }
+}
+
+@media screen and (max-width: 992px){
+  .result-table-car {
+    flex-direction: column!important;
+  }
+  .product-info-td-car {
+    width: 100%!important;
+  }
+}
+
+@media screen and (max-width: 600px){
+  .stocks-info-td-car {
+    display: flex;
+  }
+  .tr-info {
+    flex-direction: column;
+    width: 40%!important;
+  }
+  .tr-info .caption {
+    width: 100%!important;
+  }
+  .tr-details {
+    display: none!important;
+  }
+  .tr-details-mobile {
+    display: flex!important;
+    flex-direction: column;
+    width: 60%;
+  }
+  .tr-details-mobile .caption {
+    width: 100%!important;
+    color: #26272D;
+  }
+  .tr-details-mobile .caption form {
+    display: flex;
+    justify-content: center;
+  }
+
+}

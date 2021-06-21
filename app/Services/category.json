@@ -1,0 +1,38 @@
+[
+  {
+      "id": "MfCfmoAwMDE",
+    "hasSubgroups": true,
+    "hasParts": false,
+    "name": "Инструменты/Двигатель/Топливная система",
+    "img": null,
+    "description": null,
+    "parentId": null
+  },
+  {
+      "id": "MfCfmoAwMDM",
+    "hasSubgroups": true,
+    "hasParts": false,
+    "name": "Кузов",
+    "img": null,
+    "description": null,
+    "parentId": null
+  },
+  {
+      "id": "MfCfmoAwMDI",
+    "hasSubgroups": true,
+    "hasParts": false,
+    "name": "Силовая передача/Трансмиссия/Шасси",
+    "img": null,
+    "description": null,
+    "parentId": null
+  },
+  {
+      "id": "MfCfmoAwMDQ",
+    "hasSubgroups": true,
+    "hasParts": false,
+    "name": "Электрооборудование",
+    "img": null,
+    "description": null,
+    "parentId": null
+  }
+]

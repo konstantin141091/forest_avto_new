@@ -1,0 +1,58 @@
+{
+      "title": "Corona PREMIO E - AT211-AEMEK",
+    "catalogId": "toyota",
+    "brand": "Toyota",
+    "modelId": "946fc87f2830e099776a0347d56ca2ee",
+    "carId": "99613b9cee5973e0a85c9a608c1ef3e2",
+    "criteria": "23@AT211-0080320<FC17>4M7",
+    "vin": "",
+    "frame": "AT211-0080320",
+    "modelName": "Corona",
+    "source": "",
+    "description": "",
+    "optionCodes": [],
+    "parameters": [
+      {
+          "key": "grade_code",
+        "name": "Модификация",
+        "value": "AT211-AEMEK",
+        "idx": ""
+      },
+      {
+          "key": "engine_code",
+        "name": "Код двигателя",
+        "value": "7AFE",
+        "idx": ""
+      },
+      {
+          "key": "engine",
+        "name": "Двигатель",
+        "value": "1800CC 16-VALVE DOHC EFI",
+        "idx": ""
+      },
+      {
+          "key": "grade",
+        "name": "Класс",
+        "value": "PREMIO E TYPE",
+        "idx": ""
+      },
+      {
+          "key": "year",
+        "name": "Год",
+        "value": "1998",
+        "idx": ""
+      },
+      {
+          "key": "sales_region",
+        "name": "Регион",
+        "value": "Япония",
+        "idx": ""
+      },
+      {
+          "key": "trans_type",
+        "name": "Тип коробки передач",
+        "value": "МКПП",
+        "idx": ""
+      }
+    ]
+}

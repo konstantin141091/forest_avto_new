@@ -3376,6 +3376,127 @@ img {
   }
 }
 
+.product-info-td__title-car {
+  line-height: 33px;
+}
+
+.tr-details-mobile {
+  display: none !important;
+}
+
+.caption__year,
+.caption__engine,
+.caption__engine-code,
+.caption__region,
+.caption__kp,
+.caption__more {
+  padding: 1rem 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.caption__year {
+  width: 7% !important;
+}
+
+.caption__engine {
+  width: 20% !important;
+  text-align: center;
+}
+
+.caption__region {
+  width: 11% !important;
+}
+
+.caption__kp {
+  width: 35% !important;
+  text-align: center;
+}
+
+.caption-car {
+  padding: 1rem 20px !important;
+}
+
+.td__year,
+.td__engine,
+.td__engine-code,
+.td__region,
+.td__kp,
+.td__more {
+  padding: 1% 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.td__year {
+  width: 7% !important;
+}
+
+.td__engine {
+  width: 20% !important;
+  text-align: center;
+}
+
+.td__region {
+  width: 11% !important;
+}
+
+.td__kp {
+  width: 35% !important;
+  text-align: center;
+}
+
+.td__more form {
+  justify-content: center !important;
+}
+
+@media screen and (max-width: 992px) {
+  .result-table-car {
+    flex-direction: column !important;
+  }
+
+  .product-info-td-car {
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .stocks-info-td-car {
+    display: flex;
+  }
+
+  .tr-info {
+    flex-direction: column;
+    width: 40% !important;
+  }
+
+  .tr-info .caption {
+    width: 100% !important;
+  }
+
+  .tr-details {
+    display: none !important;
+  }
+
+  .tr-details-mobile {
+    display: flex !important;
+    flex-direction: column;
+    width: 60%;
+  }
+
+  .tr-details-mobile .caption {
+    width: 100% !important;
+    color: #26272D;
+  }
+
+  .tr-details-mobile .caption form {
+    display: flex;
+    justify-content: center;
+  }
+}
+
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

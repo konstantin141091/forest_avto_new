@@ -29,16 +29,35 @@ class PartsCatalogAPI
     }
 
     public function findCar($search) {
+
+        $car = file(__DIR__ . '/car.json');
+//        dd($car[1]);
+        $strin = implode('', $car);
+//        dd($strin);
+
+        $result = json_decode($strin, true);
+        $result2 = [$result];
+//        dd($result2);
+        return $result2;
+
+
+
+
+
         $url = $this->base_url . 'car/info?q=' . $search;
-        $request = $this->client->get($url, [
-            \GuzzleHttp\RequestOptions::HEADERS => $this->getHeaders()
-        ]);
-        $cars = json_decode($request->getBody()->getContents(), true);
-//        dd($cars);
-        if (empty($cars)) {
+        try {
+            $request = $this->client->get($url, [
+                \GuzzleHttp\RequestOptions::HEADERS => $this->getHeaders()
+            ]);
+            $cars = json_decode($request->getBody()->getContents(), true);
+            if (empty($cars)) {
+                return false;
+            }
+            return $cars;
+
+        } catch (\Exception $exception) {
             return false;
         }
-        return $cars;
     }
 
     public function carCategories($data) {
@@ -164,6 +183,8 @@ class PartsCatalogAPI
 //    ]
 //  }
 //]
+
+
 
 
 
