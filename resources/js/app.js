@@ -15,6 +15,7 @@ Vue.component('products-list-component', require('./components/ProductsListCompo
 Vue.component('products-list-brand-component', require('./components/ProductsListBrandComponent.vue').default);
 Vue.component('add-to-cart', require('./components/modals/AddToCart.vue').default);
 Vue.component('product-sort-component', require('./components/ProductSortComponent.vue').default);
+Vue.component('part-component', require('./components/PartComponent.vue').default);
 
 new Vue({
     el: '#app',

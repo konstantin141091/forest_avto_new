@@ -118,6 +118,15 @@ class PartsCatalogAPI
     }
 
     public function carCatalogParts($data) {
+        $cat = file(__DIR__ . '/parts.json');
+        $strin = implode('', $cat);
+        $result = json_decode($strin, true);
+        $result2 = [$result];
+//        dd($result);
+        return $result;
+
+
+
 //        $url = $this->base_url . 'catalogs/' . $data['catalogId'] . '/parts2?carId=' . $data['carId'] . '&groupId=' .
 //            $data['groupId'] . '&criteria=' . $data['criteria'];
 //        $request = $this->client->get($url, [

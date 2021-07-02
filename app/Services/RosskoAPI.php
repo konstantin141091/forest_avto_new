@@ -58,14 +58,41 @@ class RosskoAPI extends ParseService implements IParser
 
     private function parseProducts($products) {
         // начинаем перебор товаров
-        foreach ($products as $product) {
+
+        if (is_array($products)) {
+            foreach ($products as $product) {
+                // если у товара сразу есть stocks, значит это оригинал, который есть в наличии, поэтому создаем модель товара с пометкой original
+                if (property_exists($product, 'stocks')) {
+                    $this->createProduct($product, 'original');
+                }
+                // если у товара сразу есть crosses, значит это этого товара есть аналоги, перебираем их
+                if (property_exists($product, 'crosses')) {
+                    foreach ($product->crosses->Part as $product_crosses) {
+                        // если в crosses один товар, то это объект, если более одного, то это уже массив, поэтому проверка на массив
+                        if (is_array($product_crosses)) {
+                            foreach ($product_crosses as $product_crosses_value) {
+                                // если у товара сразу есть stocks, значит есть в наличии, поэтому создаем модель товара
+                                if (property_exists($product_crosses_value, 'stocks')) {
+                                    $this->createProduct($product_crosses_value, 'analog');
+                                }
+                            }
+                        } else {
+                            // если у товара сразу есть stocks, значит есть в наличии, поэтому создаем модель товара
+                            if (property_exists($product_crosses, 'stocks')) {
+                                $this->createProduct($product_crosses, 'analog');
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
             // если у товара сразу есть stocks, значит это оригинал, который есть в наличии, поэтому создаем модель товара с пометкой original
-            if (property_exists($product, 'stocks')) {
-                $this->createProduct($product, 'original');
+            if (property_exists($products, 'stocks')) {
+                $this->createProduct($products, 'original');
             }
             // если у товара сразу есть crosses, значит это этого товара есть аналоги, перебираем их
-            if (property_exists($product, 'crosses')) {
-                foreach ($product->crosses->Part as $product_crosses) {
+            if (property_exists($products, 'crosses')) {
+                foreach ($products->crosses->Part as $product_crosses) {
                     // если в crosses один товар, то это объект, если более одного, то это уже массив, поэтому проверка на массив
                     if (is_array($product_crosses)) {
                         foreach ($product_crosses as $product_crosses_value) {
@@ -83,6 +110,8 @@ class RosskoAPI extends ParseService implements IParser
                 }
             }
         }
+
+
     }
 
     private function createProduct($product, $type) {
@@ -226,7 +255,7 @@ class RosskoAPI extends ParseService implements IParser
                     ]
                 ]
             ]);
-            if ($result->SearchResult->success) {
+            if ($result->CheckoutResult->success) {
                 return true;
             } else return false;
 

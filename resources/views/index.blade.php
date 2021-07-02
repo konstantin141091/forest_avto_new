@@ -6,8 +6,8 @@
     @parent
     <h1 class="main-offer">Лучшие предложения автозапчастей для иномарок</h1>
     <div class="header__form">
-        <form action="{{ route('search.artikul') }}" method="post">
-            @csrf
+        <form action="{{ route('search.artikul') }}" method="GET">
+{{--            @csrf--}}
             <input type="text" placeholder="Введите артикул" name="artikul" value="{{ old('artikul') }}">
             <button type="submit">Подобрать запчасти</button>
         </form>

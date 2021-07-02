@@ -9,7 +9,7 @@ Route::group([
     'prefix' => 'search',
     'as' => 'search.'
 ], function() {
-    Route::post('/artikul', 'SearchController@artikul')->name('artikul');
+    Route::get('/artikul', 'SearchController@artikul')->name('artikul');
     Route::post('/car', 'SearchController@findCar')->name('car');
     Route::group([
         'prefix' => 'car',

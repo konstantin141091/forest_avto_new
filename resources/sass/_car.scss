@@ -157,7 +157,7 @@
     justify-content: space-between;
   }
   .__item>* {
-    flex: 0 0 33.3333%;
+    //flex: 0 0 33.3333%;
   }
   &__item-img {
     display: flex;
@@ -175,4 +175,31 @@
   &__item-img img:hover {
     transform: scale(1.1);
   }
+}
+
+@media screen and (max-width: 768px){
+  .car-catalog__item-title {
+    font-size: 10px!important;
+  }
+}
+
+@media screen and (max-width: 570px){
+  .car-catalog {
+    justify-content: space-around;
+    &__item {
+      max-width: 40%;
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 425px){
+  .car-catalog {
+    flex-direction: column!important;
+    align-items: center;
+    &__item {
+      max-width: 80%;
+    }
+  }
+
 }

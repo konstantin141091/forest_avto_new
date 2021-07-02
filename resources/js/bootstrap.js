@@ -32,6 +32,10 @@ import Vuex from 'vuex';
 window.Vuex = Vuex;
 Vue.use(Vuex);
 
+import Clipboard from 'vue-clipboard2'
+// window.Clipboard = Clipboard;
+Vue.use(Clipboard);
+
 // import Echo from 'laravel-echo';
 
 // window.Pusher = require('pusher-js');

@@ -13,7 +13,6 @@
                 <p class="content__text">{{ message.name }}</p>
             </div>
         </transition-group>
-
     </div>
 </template>
 

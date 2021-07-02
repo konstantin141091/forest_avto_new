@@ -153,11 +153,11 @@ class AvtoPiterAPI implements IParser
                     ]
                 ]
             ]);
-            if ($result->MakeOrderByItemsResult->ResponseCodeItemCart->Code->ResponseCode === "4") {
-                $product['SalePrice'] = $result->MakeOrderByItemsResult->ResponseCodeItemCart->Item->SalePrice;
+            if ($result->MakeOrderByItemsResult->Items->ResponseCodeItemCart->Code->ResponseCode === "4") {
+                $product['SalePrice'] = $result->MakeOrderByItemsResult->Items->ResponseCodeItemCart->Item->SalePrice;
                 $this->createOrder($product);
             }
-            if ($result->MakeOrderByItemsResult->ResponseCodeItemCart->Code->ResponseCode === "0") {
+            if ($result->MakeOrderByItemsResult->Items->ResponseCodeItemCart->Code->ResponseCode === "0") {
                 return true;
             }
             return false;
