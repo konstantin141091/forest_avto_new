@@ -107,6 +107,7 @@ class BergAPI extends ParseService implements IParser
                                 "resource_id" => $product['resource_id'],
                                 "warehouse_id" => $product['warehouse_id'],
                                 "quantity" => $product['quantity'],
+                                "delivery_type" => $product['delivery_type'],
                                 "comment" => $product['comment_product']
                             ]
                         ]

@@ -3,9 +3,9 @@
         <div class="parts__img">
             <div class="img__container">
                 <div class="img__box" id="boxImg">
-                    <img :src="parts.img" alt="part">
+                    <img :src="parts.image" alt="part">
                     <ul class="img__list">
-                        <li class="img__position" v-for="(position) in parts.positions"
+                        <li class="img__position" v-for="(position) in parts.labels"
                             :class="'position-' + position.number" @click="activeCoordinates(position.number)">
                         </li>
                     </ul>
@@ -15,7 +15,7 @@
         </div>
         <div class="parts__list">
             <add-to-cart :messages="messages"></add-to-cart>
-            <div class="parts__item" v-for="(part) in parts.partGroups">
+            <div class="parts__item" v-for="(part) in parts.numbers">
                 <h3>{{ part.name }}</h3>
                 <div class="item__info" v-for="(product, index) in part.parts" :id="'product-' + product.positionNumber">
                     <div class="d-flex align-items-center">
@@ -93,12 +93,12 @@
       initPosition() {
         let wight = 760 / document.getElementById('boxImg').clientWidth;
         let height = 1112 / document.getElementById('boxImg').clientHeight;
-        this.parts.positions.forEach((el) => {
+        this.parts.labels.forEach((el) => {
           let positions = document.querySelectorAll('.position-' + el.number);
           positions.forEach((pos) => {
-            pos.style.transform = "translate(" + (el.coordinates[0] / wight - 3) + "px," + (el.coordinates[1] / height - 3) + "px)";
-            pos.style.width = el.coordinates[2] / wight + 12 + "px";
-            pos.style.height = el.coordinates[3] / height + 12 + "px"
+            pos.style.transform = "translate(" + (el['coordinate']['top']['x'] / wight - 3) + "px," + (el['coordinate']['top']['y'] / height - 3) + "px)";
+            pos.style.width = (el['coordinate']['bottom']['x'] - el['coordinate']['top']['x']) / wight + 12 + "px";
+            pos.style.height = (el['coordinate']['bottom']['y'] - el['coordinate']['top']['y']) / height + 12 + "px"
           });
         })
       }

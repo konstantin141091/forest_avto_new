@@ -34,7 +34,7 @@
                                 <div class="tr">
                                     <div class="td">
                                         <div class="product-info-td__title product-info-td__title-car">
-                                            {{ $car['brand'] }} {{ $car['title'] }}
+                                            {{ $car['markName'] }} {{ $car['title'] }}
                                         </div>
                                         <div class="product-info-td__desc">
                                             {{ $car['frame'] }}
@@ -90,13 +90,16 @@
                                         @endforeach
                                     </div>
                                     <div class="td td__more">
-                                        <form action="{{ route('search.car.categories') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="catalogId" value="{{ $car['catalogId'] }}">
-                                            <input type="hidden" name="carId" value="{{ $car['carId'] }}">
+                                        <form action="{{ route('search.car.categories') }}" method="GET">
+                                            <input type="hidden" name="modelId" value="{{ $car['modelId'] }}">
                                             <input type="hidden" name="criteria" value="{{ $car['criteria'] }}">
                                             <input type="hidden" name="frame" value="{{ $car['frame'] }}">
                                             <input type="hidden" name="vin" value="{{ $car['vin'] }}">
+                                            <input type="hidden" name="type" value="{{ $car['type'] }}">
+                                            <input type="hidden" name="model" value="{{ $car['model'] }}">
+                                            <input type="hidden" name="modification" value="{{ $car['modification'] }}">
+                                            <input type="hidden" name="criteriaURI" value="{{ $car['criteriaURI'] }}">
+                                            <input type="hidden" name="mark" value="{{ $car['mark'] }}">
                                             <button type="submit">Посмотреть</button>
                                         </form>
                                     </div>
@@ -133,13 +136,16 @@
                                         @endforeach
                                     </div>
                                     <div class="caption caption__more">
-                                        <form action="{{ route('search.car.categories') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="catalogId" value="{{ $car['catalogId'] }}">
-                                            <input type="hidden" name="carId" value="{{ $car['carId'] }}">
+                                        <form action="{{ route('search.car.categories') }}" method="GET">
+                                            <input type="hidden" name="modelId" value="{{ $car['modelId'] }}">
                                             <input type="hidden" name="criteria" value="{{ $car['criteria'] }}">
                                             <input type="hidden" name="frame" value="{{ $car['frame'] }}">
                                             <input type="hidden" name="vin" value="{{ $car['vin'] }}">
+                                            <input type="hidden" name="type" value="{{ $car['type'] }}">
+                                            <input type="hidden" name="model" value="{{ $car['model'] }}">
+                                            <input type="hidden" name="modification" value="{{ $car['modification'] }}">
+                                            <input type="hidden" name="criteriaURI" value="{{ $car['criteriaURI'] }}">
+                                            <input type="hidden" name="mark" value="{{ $car['mark'] }}">
                                             <button type="submit">Посмотреть</button>
                                         </form>
                                     </div>

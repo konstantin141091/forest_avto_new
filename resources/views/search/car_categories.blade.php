@@ -28,12 +28,18 @@
                             <div class="tr tr__category">
                                 <div class="td td__category">{{ $catalog['name'] }}</div>
                                 <div class="td td__category-more">
-                                    <form action="{{ route('search.car.catalog') }}" method="POST">
-                                        @csrf
+                                    <form action="{{ route('search.car.catalog') }}" method="GET">
                                         <input type="hidden" name="groupId" value="{{ $catalog['id'] }}">
-                                        <input type="hidden" name="catalogId" value="{{ $data['catalogId'] }}">
-                                        <input type="hidden" name="carId" value="{{ $data['carId'] }}">
+                                        <input type="hidden" name="modelId" value="{{ $data['modelId'] }}">
                                         <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">
+                                        <input type="hidden" name="frame" value="{{ $data['frame'] }}">
+                                        <input type="hidden" name="vin" value="{{ $data['vin'] }}">
+                                        <input type="hidden" name="type" value="{{ $data['type'] }}">
+                                        <input type="hidden" name="model" value="{{ $data['model'] }}">
+                                        <input type="hidden" name="modification" value="{{ $data['modification'] }}">
+                                        <input type="hidden" name="criteriaURI" value="{{ $data['criteriaURI'] }}">
+                                        <input type="hidden" name="mark" value="{{ $data['mark'] }}">
+
                                         <button type="submit" class="button-category">Подробнее</button>
                                     </form>
                                 </div>

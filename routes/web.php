@@ -10,14 +10,14 @@ Route::group([
     'as' => 'search.'
 ], function() {
     Route::get('/artikul', 'SearchController@artikul')->name('artikul');
-    Route::post('/car', 'SearchController@findCar')->name('car');
+    Route::get('/car', 'SearchController@findCar')->name('car');
     Route::group([
         'prefix' => 'car',
         'as' => 'car.'
     ], function () {
-        Route::post('/categories', 'SearchController@carCategories')->name('categories');
-        Route::post('/catalog', 'SearchController@carCatalog')->name('catalog');
-        Route::post('/catalog/parts', 'SearchController@carCatalogParts')->name('catalog.parts');
+        Route::get('/categories', 'SearchController@carCategories')->name('categories');
+        Route::get('/catalog', 'SearchController@carCatalog')->name('catalog');
+        Route::get('/catalog/parts', 'SearchController@carCatalogParts')->name('catalog.parts');
     });
 
 

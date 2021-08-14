@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SearchRequest;
+use App\Services\AvtoCatalog;
 use App\Services\ParseService;
 use App\Services\PartsCatalogAPI;
 use Illuminate\Http\Request;
@@ -43,74 +44,134 @@ class SearchController extends Controller
         $request->flash();
         $success = false;
         $search = $request->search;
-        $partsCatalog = new PartsCatalogAPI();
-        $cars = $partsCatalog->findCar($search);
+
+        // новая апи
+        $avtoCatalog = new AvtoCatalog();
+        $cars = $avtoCatalog->getCar($search);
+
+        // старая апи
+//        $partsCatalog = new PartsCatalogAPI();
+//        $cars = $partsCatalog->findCar($search);
 
         if ($cars) {
             $success = true;
         }
 //        dd($cars);
         return view('search.cars', [
-            'cars' => $cars,
+            'cars' => $cars['vins'],
             'success' => $success,
         ]);
     }
 
     public function carCategories(Request $request) {
         $success = false;
+
+        // старая апи
+//        $data = [
+//            'catalogId' => $request->catalogId,
+//            'carId' => $request->carId,
+//            'criteria' => $request->criteria,
+//            'frame' => $request->frame,
+//            'vin' => $request->vin,
+//        ];
+//        $partsCatalog = new PartsCatalogAPI();
+//        $categories = $partsCatalog->carCategories($data);
+
+        // новая апи
         $data = [
-            'catalogId' => $request->catalogId,
-            'carId' => $request->carId,
+            'modelId' => $request->modelId,
             'criteria' => $request->criteria,
             'frame' => $request->frame,
             'vin' => $request->vin,
+            'type' => $request->type,
+            'model' => $request->model,
+            'modification' => $request->modification,
+            'criteriaURI' => $request->criteriaURI,
+            'mark' => $request->mark,
         ];
-        $partsCatalog = new PartsCatalogAPI();
-        $categories = $partsCatalog->carCategories($data);
+        $avtoCatalog = new AvtoCatalog();
+        $categories = $avtoCatalog->carCategories($data);
+
         if ($categories) {
             $success = true;
         }
-//        dd($catalog);
         return view('search.car_categories', [
-            'categories' => $categories,
+            'categories' => $categories['groups'],
             'data' => $data,
             'success' => $success,
         ]);
     }
 
     public function carCatalog(Request $request) {
-//        dd($request->all());
         $success = false;
+        // старая апи
+//        $data = [
+//            'catalogId' => $request->catalogId,
+//            'carId' => $request->carId,
+//            'criteria' => $request->criteria,
+//            'groupId' => $request->groupId,
+//        ];
+//        $partsCatalog = new PartsCatalogAPI();
+//        $catalog = $partsCatalog->carCatalog($data);
+
+        // новая апи
+
         $data = [
-            'catalogId' => $request->catalogId,
-            'carId' => $request->carId,
+            'modelId' => $request->modelId,
             'criteria' => $request->criteria,
+            'frame' => $request->frame,
+            'vin' => $request->vin,
+            'type' => $request->type,
+            'model' => $request->model,
+            'modification' => $request->modification,
+            'criteriaURI' => $request->criteriaURI,
+            'mark' => $request->mark,
             'groupId' => $request->groupId,
         ];
-        $partsCatalog = new PartsCatalogAPI();
-        $catalog = $partsCatalog->carCatalog($data);
+        $avtoCatalog = new AvtoCatalog();
+        $catalog = $avtoCatalog->carCatalog($data);
+
         if ($catalog) {
             $success = true;
         }
 //        dd($catalog);
         return view('search.car_catalog', [
-            'catalog' => $catalog,
+            'catalog' => $catalog['groups'],
             'data' => $data,
             'success' => $success,
         ]);
     }
 
     public function carCatalogParts(Request $request) {
-//        dd($request->all());
         $success = false;
+
+        // старая апи
+//        $data = [
+//            'catalogId' => $request->catalogId,
+//            'carId' => $request->carId,
+//            'criteria' => $request->criteria,
+//            'groupId' => $request->groupId,
+//        ];
+//        $partsCatalog = new PartsCatalogAPI();
+//        $parts = $partsCatalog->carCatalogParts($data);
+
+        // новая апи
         $data = [
-            'catalogId' => $request->catalogId,
-            'carId' => $request->carId,
+            'modelId' => $request->modelId,
             'criteria' => $request->criteria,
+            'frame' => $request->frame,
+            'vin' => $request->vin,
+            'type' => $request->type,
+            'model' => $request->model,
+            'modification' => $request->modification,
+            'criteriaURI' => $request->criteriaURI,
+            'mark' => $request->mark,
             'groupId' => $request->groupId,
+            'subGroup' => $request->subGroup,
         ];
-        $partsCatalog = new PartsCatalogAPI();
-        $parts = $partsCatalog->carCatalogParts($data);
+
+        $avtoCatalog = new AvtoCatalog();
+        $parts = $avtoCatalog->carCatalogParts($data);
 //        dd($parts);
         if ($parts) {
             $success = true;

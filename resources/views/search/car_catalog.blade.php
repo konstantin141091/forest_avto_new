@@ -25,13 +25,27 @@
                 <div class="car-catalog">
                     @foreach($catalog as $index => $value)
                         @if($value['hasParts'])
-                        <form class="car-catalog__item" method="POST" action="{{ route('search.car.catalog.parts') }}" onclick="submit()">
-                            @csrf
-                            <input type="hidden" name="catalogId" value="{{ $data['catalogId'] }}">
-                            <input type="hidden" name="carId" value="{{ $data['carId'] }}">
+                        <form class="car-catalog__item" method="GET" action="{{ route('search.car.catalog.parts') }}" onclick="submit()">
+                            <input type="hidden" name="groupId" value="{{ $data['groupId'] }}">
+                            <input type="hidden" name="modelId" value="{{ $data['modelId'] }}">
                             <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">
-                            <input type="hidden" name="groupId" value="{{ $value['id'] }}">
+                            <input type="hidden" name="frame" value="{{ $data['frame'] }}">
+                            <input type="hidden" name="vin" value="{{ $data['vin'] }}">
+                            <input type="hidden" name="type" value="{{ $data['type'] }}">
+                            <input type="hidden" name="model" value="{{ $data['model'] }}">
+                            <input type="hidden" name="modification" value="{{ $data['modification'] }}">
+                            <input type="hidden" name="criteriaURI" value="{{ $data['criteriaURI'] }}">
+                            <input type="hidden" name="mark" value="{{ $data['mark'] }}">
                             <input type="hidden" name="img " value="{{ $value['img'] }}">
+                            <input type="hidden" name="subGroup" value="{{ $value['id'] }}">
+                            <input type="hidden" name="test" value="test">
+
+
+{{--                            <input type="hidden" name="catalogId" value="{{ $data['catalogId'] }}">--}}
+{{--                            <input type="hidden" name="carId" value="{{ $data['carId'] }}">--}}
+{{--                            <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">--}}
+{{--                            <input type="hidden" name="groupId" value="{{ $value['id'] }}">--}}
+{{--                            <input type="hidden" name="img " value="{{ $value['img'] }}">--}}
                             <div class="car-catalog__item-title">
                                 {{ $value['name'] }}
                             </div>
@@ -40,13 +54,24 @@
                             </div>
                         </form>
                         @else
-                            <form class="car-catalog__item" method="POST" action="{{ route('search.car.catalog') }}" onclick="submit()">
-                                @csrf
-                                <input type="hidden" name="catalogId" value="{{ $data['catalogId'] }}">
-                                <input type="hidden" name="carId" value="{{ $data['carId'] }}">
-                                <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">
+                            <form class="car-catalog__item" method="GET" action="{{ route('search.car.catalog') }}" onclick="submit()">
                                 <input type="hidden" name="groupId" value="{{ $value['id'] }}">
                                 <input type="hidden" name="img " value="{{ $value['img'] }}">
+                                <input type="hidden" name="modelId" value="{{ $data['modelId'] }}">
+                                <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">
+                                <input type="hidden" name="frame" value="{{ $data['frame'] }}">
+                                <input type="hidden" name="vin" value="{{ $data['vin'] }}">
+                                <input type="hidden" name="type" value="{{ $data['type'] }}">
+                                <input type="hidden" name="model" value="{{ $data['model'] }}">
+                                <input type="hidden" name="modification" value="{{ $data['modification'] }}">
+                                <input type="hidden" name="criteriaURI" value="{{ $data['criteriaURI'] }}">
+                                <input type="hidden" name="mark" value="{{ $data['mark'] }}">
+
+{{--                                <input type="hidden" name="catalogId" value="{{ $data['catalogId'] }}">--}}
+{{--                                <input type="hidden" name="carId" value="{{ $data['carId'] }}">--}}
+{{--                                <input type="hidden" name="criteria" value="{{ $data['criteria'] }}">--}}
+{{--                                <input type="hidden" name="groupId" value="{{ $value['id'] }}">--}}
+{{--                                <input type="hidden" name="img " value="{{ $value['img'] }}">--}}
 
                                 <div class="car-catalog__item-title">
                                     {{ $value['name'] }}

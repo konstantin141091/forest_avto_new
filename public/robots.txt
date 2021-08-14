@@ -1,2 +1,26 @@
 User-agent: *
 Disallow:
+
+User-agent: Yandex
+Disallow: /catalogs
+Disallow: /search/car
+
+User-agent: YandexBot
+Disallow: /catalogs
+Disallow: /search/car
+
+User-agent: Google
+Disallow: /catalogs
+Disallow: /search/car
+
+User-agent: Googlebot
+Disallow: /catalogs
+Disallow: /search/car
+
+User-agent: Mail
+Disallow: /catalogs
+Disallow: /search/car
+
+User-agent: *
+Disallow: /catalogs
+Disallow: /search/car

@@ -19,8 +19,7 @@
             </div>
         @endif
 
-        <form action="{{ route('search.car') }}" method="post" class="mt-3">
-            @csrf
+        <form action="{{ route('search.car') }}" method="GET" class="mt-3">
             <input type="text" placeholder="Введите VIN/FRAME" name="search" value="{{ old('search') }}">
             <button type="submit">Подобрать запчасти</button>
         </form>
