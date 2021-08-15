@@ -3,7 +3,7 @@
         <div class="parts__img">
             <div class="img__container">
                 <div class="img__box" id="boxImg">
-                    <img :src="parts.image" alt="part">
+                    <img :src="parts.image" alt="part" id="img-el">
                     <ul class="img__list">
                         <li class="img__position" v-for="(position) in parts.labels"
                             :class="'position-' + position.number" @click="activeCoordinates(position.number)">
@@ -91,8 +91,9 @@
         this.initPosition()
       },
       initPosition() {
-        let wight = 760 / document.getElementById('boxImg').clientWidth;
-        let height = 1112 / document.getElementById('boxImg').clientHeight;
+        const img = document.getElementById('img-el');
+        let wight = img.naturalWidth / document.getElementById('boxImg').clientWidth;
+        let height = img.naturalHeight / document.getElementById('boxImg').clientHeight;
         this.parts.labels.forEach((el) => {
           let positions = document.querySelectorAll('.position-' + el.number);
           positions.forEach((pos) => {
